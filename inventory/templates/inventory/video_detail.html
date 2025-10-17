@@ -1,0 +1,14 @@
+{% extends "inventory/base.html" %}
+
+{% block content %}
+  <h2>{{ video.MovieTitle }} ({{ video.ReleaseYear }})</h2>
+  <p>MovieID: {{ video.MovieID }}</p>
+  <p>Director: {{ video.DirectorName }}</p>
+  <p>Actor 1: {{ video.Actor1Name }}</p>
+  <p>Actor 2: {{ video.Actor2Name }}</p>
+  <p>Genre: {{ video.MovieGenre }}</p>
+  <p>
+    <a href="{% url 'video_update' pk=video.pk %}" style="color:blue;">Edit</a>
+    <a href="{% url 'video_delete' pk=video.pk %}" style="color:red;">Delete</a>
+  </p>
+{% endblock %}

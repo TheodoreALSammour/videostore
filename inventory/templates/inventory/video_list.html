@@ -1,0 +1,34 @@
+{% extends "inventory/base.html" %}
+{% block content %}
+  <p><a class="button" href="{% url 'video_create' %}" style="color:blue;">+ Add New Video</a></p>
+  {% if videos %}
+    <table>
+      <thead>
+        <tr>
+          <th style="color:red;">MovieID</th>
+          <th style="color:red;">Title</th>
+          <th style="color:red;">Genre</th>
+          <th style="color:red;">Year</th>
+          <th style="color:red;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for v in videos %}
+        <tr>
+<!-- create the name of the movie as hyperlink to the video details -->
+          <td>{{ v.MovieID }}</td>
+          <td><a href="{% url 'video_detail' pk=v.pk %}">{{ v.MovieTitle }}</a></td>
+          <td>{{ v.MovieGenre }}</td>
+          <td>{{ v.ReleaseYear }}</td>
+          <td>
+            <a href="{% url 'video_update' pk=v.pk %}">Edit</a> 
+            <a href="{% url 'video_delete' pk=v.pk %}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p style="color:red;">No videos uploaded yet. Add one!</p>
+  {% endif %}
+{% endblock %}
