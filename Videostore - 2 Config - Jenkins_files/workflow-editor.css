@@ -1,0 +1,185 @@
+.workflow-editor-wrapper .ui-resizable-handle {
+  z-index: 8 !important;
+  /* jenkins form buttons have a z-index of 9 */
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: row-resize;
+  width: 12px;
+  height: 12px;
+  background: currentColor;
+  mask-image: url("data:image/svg+xml,%3C%3Fxml version=%271.0%27 encoding=%27UTF-8%27%3F%3E%3Csvg width=%2720px%27 height=%2720px%27 viewBox=%270 0 20 20%27 version=%271.1%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cg id=%27Page-1%27 stroke=%27none%27 stroke-width=%271%27 fill=%27none%27 fill-rule=%27evenodd%27%3E%3Cline x1=%2719%27 y1=%2712%27 x2=%2712%27 y2=%2719%27 id=%27Path%27 stroke=%27%23979797%27 stroke-width=%272%27%3E%3C/line%3E%3Cline x1=%271%27 y1=%2718%27 x2=%2717.9705627%27 y2=%271.02943725%27 id=%27Path-2%27 stroke=%27%23979797%27 stroke-width=%272%27%3E%3C/line%3E%3C/g%3E%3C/svg%3E");
+  mask-size: 7px 7px;
+  mask-position: 3px 3px;
+  mask-repeat: no-repeat;
+  opacity: 0.75;
+}
+.ace_tooltip {
+  background: transparent !important;
+  border: none !important;
+  color: var(--tooltip-color);
+  padding: 0.45rem 0.8rem;
+  border-radius: 0.66rem;
+  box-shadow: var(--tooltip-box-shadow);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  white-space: pre-line;
+  backdrop-filter: var(--tooltip-backdrop-filter);
+}
+.ace_editor .ace_gutter {
+  background: transparent;
+  color: var(--text-color-secondary);
+}
+.ace_editor .ace_print-margin {
+  background: transparent;
+}
+.ace_fold {
+  position: relative;
+  border: none !important;
+  background: transparent !important;
+}
+.ace_fold::before,
+.ace_fold::after {
+  content: "";
+  position: absolute;
+}
+.ace_fold::before {
+  background: var(--text-color-secondary);
+  border-radius: 4px;
+  opacity: 0.4;
+  transition: 0.1s linear;
+  inset: 0 2px;
+}
+.ace_fold::after {
+  inset: -2px;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 512 512%27%3E%3Ccircle cx=%27256%27 cy=%27256%27 r=%2748%27/%3E%3Ccircle cx=%27416%27 cy=%27256%27 r=%2748%27/%3E%3Ccircle cx=%2796%27 cy=%27256%27 r=%2748%27/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  background: var(--white);
+  z-index: 1;
+}
+.ace_fold:hover::before {
+  opacity: 0.6;
+}
+.ace_fold:active::before {
+  opacity: 0.8;
+}
+.ace_fold-widget {
+  background: currentColor !important;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 512 512%27%3E%3Cpath fill=%27none%27 stroke=%27currentColor%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%2748%27 d=%27M112 184l144 144 144-144%27/%3E%3C/svg%3E");
+  mask-position: center;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  transition: rotate 0.1s linear;
+}
+.ace_fold-widget.ace_closed {
+  rotate: -90deg;
+}
+.ace_editor {
+  background: var(--input-color);
+  border: var(--jenkins-border-width, 2px) solid var(--input-border);
+  border-radius: var(--form-input-border-radius);
+  font-family: var(--font-family-mono) !important;
+  font-size: var(--font-size-monospace);
+  font-weight: normal !important;
+  line-height: 1.66 !important;
+  box-shadow: var(--form-input-glow);
+  transition: border var(--standard-transition), box-shadow var(--standard-transition), height 0s;
+  color: var(--text-color);
+}
+.ace_editor:hover {
+  border-color: var(--input-border-hover);
+}
+.ace_editor:active,
+.ace_editor:focus-within {
+  outline: none;
+  border-color: var(--focus-input-border);
+  box-shadow: var(--form-input-glow--focus);
+}
+.ace_editor .ace_cursor {
+  color: var(--text-color);
+}
+.ace_editor .ace_marker-layer .ace_selection {
+  background: var(--selection-color);
+}
+.ace_editor.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px #1D1F21;
+}
+.ace_editor .ace_marker-layer .ace_step {
+  background: #665200;
+}
+.ace_editor .ace_marker-layer .ace_bracket {
+  display: none;
+}
+.ace_editor .ace_marker-layer .ace_active-line,
+.ace_editor .ace_gutter-active-line {
+  background: color-mix(in srgb, var(--text-color-secondary) 5%, transparent);
+}
+.ace_editor .ace_marker-layer .ace_selected-word {
+  background: var(--selection-color);
+  border: none;
+}
+.ace_editor .ace_invisible {
+  color: #4B4E55;
+}
+.ace_editor .ace_keyword,
+.ace_editor .ace_meta,
+.ace_editor .ace_storage,
+.ace_editor .ace_storage.ace_type,
+.ace_editor .ace_support.ace_type {
+  color: var(--purple);
+}
+.ace_editor .ace_keyword.ace_operator {
+  color: color-mix(in srgb, var(--green), transparent);
+}
+.ace_editor .ace_constant.ace_character,
+.ace_editor .ace_constant.ace_language,
+.ace_editor .ace_constant.ace_numeric,
+.ace_editor .ace_keyword.ace_other.ace_unit,
+.ace_editor .ace_support.ace_constant,
+.ace_editor .ace_variable.ace_parameter {
+  color: #DE935F;
+}
+.ace_editor .ace_constant.ace_other {
+  color: #CED1CF;
+}
+.ace_editor .ace_invalid {
+  color: #CED2CF;
+  background-color: #DF5F5F;
+}
+.ace_editor .ace_invalid.ace_deprecated {
+  color: #CED2CF;
+  background-color: #B798BF;
+}
+.ace_editor .ace_entity.ace_name.ace_function,
+.ace_editor .ace_support.ace_function,
+.ace_editor .ace_variable {
+  color: #81A2BE;
+}
+.ace_editor .ace_support.ace_class,
+.ace_editor .ace_support.ace_type {
+  color: #F0C674;
+}
+.ace_editor .ace_heading,
+.ace_editor .ace_markup.ace_heading,
+.ace_editor .ace_string {
+  color: var(--green);
+}
+.ace_editor .ace_entity.ace_name.ace_tag,
+.ace_editor .ace_entity.ace_other.ace_attribute-name,
+.ace_editor .ace_meta.ace_tag,
+.ace_editor .ace_string.ace_regexp,
+.ace_editor .ace_variable {
+  color: var(--red);
+}
+.ace_editor .ace_comment {
+  color: var(--text-color-secondary);
+}
+.ace_editor .ace_indent-guide {
+  background: transparent;
+}
+.ace_editor .ace_indent-guide-active {
+  background: transparent;
+}
+
