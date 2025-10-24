@@ -3,85 +3,92 @@ pipeline {
   options { timestamps() }
 
   environment {
-    PROFILE       = 'jenkins'
+    PROFILE       = 'jenkins'   // your service-account profile (option 2)
     MINIKUBE_HOME = 'C:\\ProgramData\\Jenkins\\.minikube'
     KUBECONFIG    = 'C:\\ProgramData\\Jenkins\\.kube\\config'
   }
 
   stages {
-    stage('Who am I?') {
-      steps {
-        bat 'whoami & echo MINIKUBE_HOME=%MINIKUBE_HOME% & echo KUBECONFIG=%KUBECONFIG%'
-      }
-    }
-
-    stage('Checkout') {
-      steps {
-        checkout([$class: 'GitSCM',
-          branches: [[name: '*/main']],
-          userRemoteConfigs: [[url: 'https://github.com/TheodoreALSammour/videostore.git']]
-        ])
-      }
-    }
-
     stage('Start Minikube (service profile)') {
+      options { timeout(time: 8, unit: 'MINUTES') }   // <- cap this
       steps {
         bat '''
-          REM Ensure dirs exist (idempotent)
+          echo === Ensure dirs ===
           if not exist "%MINIKUBE_HOME%" mkdir "%MINIKUBE_HOME%"
-          if not exist "%~dp0" echo. > nul
-          
-          REM Start or ensure running (driver must match your machine - docker is common)
-          minikube -p %PROFILE% status || minikube -p %PROFILE% start --driver=docker
-          
-          REM Update kube context in the service's KUBECONFIG
+          if not exist "%KUBECONFIG%" ( if not exist "C:\\ProgramData\\Jenkins\\.kube" mkdir "C:\\ProgramData\\Jenkins\\.kube" )
+
+          echo === Start/ensure Minikube ===
+          minikube -p %PROFILE% status || minikube -p %PROFILE% start --driver=docker --wait=apiserver,system_pods,default_sa --wait-timeout=6m
+
+          echo === Update context & show cluster ===
           minikube -p %PROFILE% update-context
-          
-          REM Show status/context for debugging
-          kubectl config get-contexts
           kubectl config use-context %PROFILE%
+          kubectl config view --minify -o jsonpath="{.clusters[0].cluster.server}" & echo.
           kubectl cluster-info
         '''
+      }
+      post {
+        failure {
+          bat '''
+            echo === DEBUG: Minikube logs (last 400 lines) ===
+            minikube -p %PROFILE% logs --length=400
+          '''
+        }
       }
     }
 
     stage('Build in Minikube Docker') {
+      options { timeout(time: 10, unit: 'MINUTES') }  // <- cap build
       steps {
         bat '''
-          REM Apply docker-env inline for THIS profile (NO temp .bat files)
+          echo === Point Docker CLI to Minikube Docker ===
           for /f "tokens=* delims=" %%i in ('minikube -p %PROFILE% docker-env --shell=cmd') do %%i
 
           docker version
-          docker build -t mydjangoapp:latest .
+          docker build --progress=plain -t mydjangoapp:latest .
         '''
       }
     }
 
     stage('Deploy to Minikube') {
+      options { timeout(time: 10, unit: 'MINUTES') }  // <- cap deploy
       steps {
         bat '''
-          REM Clear any poison that points kubectl to Jenkins :8080
+          echo === Clear env overrides that force :8080 ===
           set KUBERNETES_MASTER=
           set K8S_MASTER=
           set HTTP_PROXY=
           set HTTPS_PROXY=
 
-          REM Use the service profile's kube context
+          echo === Confirm context & API URL ===
           kubectl config use-context %PROFILE%
-
-          REM Print the server address (must be https://..., not http://localhost:8080)
           kubectl config view --minify -o jsonpath="{.clusters[0].cluster.server}" & echo.
           kubectl cluster-info
 
-          REM Apply and wait
-          kubectl apply -f deployment.yaml
-          kubectl apply -f service.yaml
-          kubectl rollout status deployment/django-deployment
+          echo === Apply manifests ===
+          kubectl apply -f deployment.yaml --validate=false
+          kubectl apply -f service.yaml --validate=false
+
+          echo === Wait for rollout (bounded) ===
+          kubectl rollout status deployment/django-deployment --timeout=180s
         '''
+      }
+      post {
+        unsuccessful {
+          bat '''
+            echo === DEBUG: Pods, Events, and Describes ===
+            kubectl get pods -o wide
+            kubectl get events --sort-by=.lastTimestamp -A | tail -n 100
+            kubectl describe deploy django-deployment
+            for /f "tokens=1" %%p in ('kubectl get pods -o name') do kubectl describe %%p
+            kubectl get svc -o wide
+          '''
+        }
       }
     }
 
     stage('Show Service URL') {
+      options { timeout(time: 2, unit: 'MINUTES') }
       steps {
         bat 'minikube -p %PROFILE% service django-service --url'
       }

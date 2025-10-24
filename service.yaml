@@ -3,10 +3,9 @@ kind: Service
 metadata:
   name: django-service
 spec:
+  type: LoadBalancer     # <— change this
   selector:
-    app: django-app
+    app: django
   ports:
-    - protocol: TCP
-      port: 8000
+    - port: 8000
       targetPort: 8000
-  type: NodePort
