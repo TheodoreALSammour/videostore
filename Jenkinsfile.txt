@@ -1,0 +1,29 @@
+pipeline {
+  agent any
+
+  stages {
+
+    stage('Install & Migrate') {
+      steps {
+        bat '''
+          cd C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Videostore
+          py -3 -m venv .venv
+          .venv\\Scripts\\python -m pip install --upgrade pip
+          .venv\\Scripts\\pip install -r requirements.txt
+          .venv\\Scripts\\python manage.py migrate
+        '''
+      }
+    }
+
+    stage('Start Server (Detached)') {
+      steps {
+        powershell '''
+          $proj = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Videostore"
+          $py   = Join-Path $proj ".venv\\Scripts\\python.exe"
+          $args = "manage.py","runserver","0.0.0.0:8001"
+          Start-Process -FilePath $py -ArgumentList $args -WorkingDirectory $proj -WindowStyle Hidden
+        '''
+      }
+    }
+  }
+}

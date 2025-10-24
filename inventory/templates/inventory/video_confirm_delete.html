@@ -1,0 +1,10 @@
+{% extends "inventory/base.html" %}
+{% block content %}
+  <h2>Delete Video</h2>
+  <p>Are you sure you want to delete <strong>{{ video.MovieTitle }}</strong> (ID {{ video.MovieID }})?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'video_detail' pk=video.pk %}">Cancel</a>
+  </form>
+{% endblock %}

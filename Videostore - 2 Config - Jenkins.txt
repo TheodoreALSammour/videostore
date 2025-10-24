@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)http://localhost:8080/job/Videostore%20-%202/configure -->
+<html data-theme="none"><head resurl="/static/ae5d0940" data-rooturl="" data-resurl="/static/ae5d0940" data-extensions-available="true" data-unit-test="false" data-imagesurl="/static/ae5d0940/images" data-crumb-header="Jenkins-Crumb" data-crumb-value="30113f55565f385cc6cc00fbf59ddda329c027927b88d790199bbd91bc5a6e31"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="autocompletion.css">
+.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {
+    background-color: #CAD6FA;
+    z-index: 1;
+}
+.ace_dark.ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line {
+    background-color: #3a674e;
+}
+.ace_editor.ace_autocomplete .ace_line-hover {
+    border: 1px solid #abbffe;
+    margin-top: -1px;
+    background: rgba(233,233,253,0.4);
+    position: absolute;
+    z-index: 2;
+}
+.ace_dark.ace_editor.ace_autocomplete .ace_line-hover {
+    border: 1px solid rgba(109, 150, 13, 0.8);
+    background: rgba(58, 103, 78, 0.62);
+}
+.ace_completion-meta {
+    opacity: 0.5;
+    margin-left: 0.9em;
+}
+.ace_completion-message {
+    margin-left: 0.9em;
+    color: blue;
+}
+.ace_editor.ace_autocomplete .ace_completion-highlight{
+    color: #2d69c7;
+}
+.ace_dark.ace_editor.ace_autocomplete .ace_completion-highlight{
+    color: #93ca12;
+}
+.ace_editor.ace_autocomplete {
+    width: 300px;
+    z-index: 200000;
+    border: 1px lightgray solid;
+    position: absolute;
+    box-shadow: 2px 3px 5px rgba(0,0,0,.2);
+    line-height: 1.4;
+    background: #fefefe;
+    color: #111;
+}
+.ace_dark.ace_editor.ace_autocomplete {
+    border: 1px #484747 solid;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.51);
+    line-height: 1.4;
+    background: #25282c;
+    color: #c1c1c1;
+}
+.ace_autocomplete .ace_text-layer  {
+    width: calc(100% - 8px);
+}
+.ace_autocomplete .ace_line {
+    display: flex;
+    align-items: center;
+}
+.ace_autocomplete .ace_line > * {
+    min-width: 0;
+    flex: 0 0 auto;
+}
+.ace_autocomplete .ace_line .ace_ {
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ace_autocomplete .ace_completion-spacer {
+    flex: 1;
+}
+.ace_autocomplete.ace_loading:after  {
+    content: "";
+    position: absolute;
+    top: 0px;
+    height: 2px;
+    width: 8%;
+    background: blue;
+    z-index: 100;
+    animation: ace_progress 3s infinite linear;
+    animation-delay: 300ms;
+    transform: translateX(-100%) scaleX(1);
+}
+@keyframes ace_progress {
+    0% { transform: translateX(-100%) scaleX(1) }
+    50% { transform: translateX(625%) scaleX(2) } 
+    100% { transform: translateX(1500%) scaleX(3) } 
+}
+@media (prefers-reduced-motion) {
+    .ace_autocomplete.ace_loading:after {
+        transform: translateX(625%) scaleX(2);
+        animation: none;
+     }
+}
+
+/*# sourceURL=ace/css/autocompletion.css */</style><style id="snippets.css">
+.ace_snippet-marker {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: rgba(194, 193, 208, 0.09);
+    border: 1px dotted rgba(211, 208, 235, 0.62);
+    position: absolute;
+}
+/*# sourceURL=ace/css/snippets.css */</style><style id="error_marker.css">
+    .error_widget_wrapper {
+        background: inherit;
+        color: inherit;
+        border:none
+    }
+    .error_widget {
+        border-top: solid 2px;
+        border-bottom: solid 2px;
+        margin: 5px 0;
+        padding: 10px 40px;
+        white-space: pre-wrap;
+    }
+    .error_widget.ace_error, .error_widget_arrow.ace_error{
+        border-color: #ff5a5a
+    }
+    .error_widget.ace_warning, .error_widget_arrow.ace_warning{
+        border-color: #F1D817
+    }
+    .error_widget.ace_info, .error_widget_arrow.ace_info{
+        border-color: #5a5a5a
+    }
+    .error_widget.ace_ok, .error_widget_arrow.ace_ok{
+        border-color: #5aaa5a
+    }
+    .error_widget_arrow {
+        position: absolute;
+        border: solid 5px;
+        border-top-color: transparent!important;
+        border-right-color: transparent!important;
+        border-left-color: transparent!important;
+        top: -5px;
+    }
+
+/*# sourceURL=ace/css/error_marker.css */</style><style id="ace-tm">.ace-tm .ace_gutter {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.ace-tm .ace_print-margin {
+  width: 1px;
+  background: #e8e8e8;
+}
+
+.ace-tm .ace_fold {
+    background-color: #6B72E6;
+}
+
+.ace-tm {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.ace-tm .ace_cursor {
+  color: black;
+}
+        
+.ace-tm .ace_invisible {
+  color: rgb(191, 191, 191);
+}
+
+.ace-tm .ace_storage,
+.ace-tm .ace_keyword {
+  color: blue;
+}
+
+.ace-tm .ace_constant {
+  color: rgb(197, 6, 11);
+}
+
+.ace-tm .ace_constant.ace_buildin {
+  color: rgb(88, 72, 246);
+}
+
+.ace-tm .ace_constant.ace_language {
+  color: rgb(88, 92, 246);
+}
+
+.ace-tm .ace_constant.ace_library {
+  color: rgb(6, 150, 14);
+}
+
+.ace-tm .ace_invalid {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: red;
+}
+
+.ace-tm .ace_support.ace_function {
+  color: rgb(60, 76, 114);
+}
+
+.ace-tm .ace_support.ace_constant {
+  color: rgb(6, 150, 14);
+}
+
+.ace-tm .ace_support.ace_type,
+.ace-tm .ace_support.ace_class {
+  color: rgb(109, 121, 222);
+}
+
+.ace-tm .ace_keyword.ace_operator {
+  color: rgb(104, 118, 135);
+}
+
+.ace-tm .ace_string {
+  color: rgb(3, 106, 7);
+}
+
+.ace-tm .ace_comment {
+  color: rgb(76, 136, 107);
+}
+
+.ace-tm .ace_comment.ace_doc {
+  color: rgb(0, 102, 255);
+}
+
+.ace-tm .ace_comment.ace_doc.ace_tag {
+  color: rgb(128, 159, 191);
+}
+
+.ace-tm .ace_constant.ace_numeric {
+  color: rgb(0, 0, 205);
+}
+
+.ace-tm .ace_variable {
+  color: rgb(49, 132, 149);
+}
+
+.ace-tm .ace_xml-pe {
+  color: rgb(104, 104, 91);
+}
+
+.ace-tm .ace_entity.ace_name.ace_function {
+  color: #0000A2;
+}
+
+
+.ace-tm .ace_heading {
+  color: rgb(12, 7, 255);
+}
+
+.ace-tm .ace_list {
+  color:rgb(185, 6, 144);
+}
+
+.ace-tm .ace_meta.ace_tag {
+  color:rgb(0, 22, 142);
+}
+
+.ace-tm .ace_string.ace_regex {
+  color: rgb(255, 0, 0)
+}
+
+.ace-tm .ace_marker-layer .ace_selection {
+  background: rgb(181, 213, 255);
+}
+.ace-tm.ace_multiselect .ace_selection.ace_start {
+  box-shadow: 0 0 3px 0px white;
+}
+.ace-tm .ace_marker-layer .ace_step {
+  background: rgb(252, 255, 0);
+}
+
+.ace-tm .ace_marker-layer .ace_stack {
+  background: rgb(164, 229, 101);
+}
+
+.ace-tm .ace_marker-layer .ace_bracket {
+  margin: -1px 0 0 -1px;
+  border: 1px solid rgb(192, 192, 192);
+}
+
+.ace-tm .ace_marker-layer .ace_active-line {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+.ace-tm .ace_gutter-active-line {
+    background-color : #dcdcdc;
+}
+
+.ace-tm .ace_marker-layer .ace_selected-word {
+  background: rgb(250, 250, 255);
+  border: 1px solid rgb(200, 200, 250);
+}
+
+.ace-tm .ace_indent-guide {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;
+}
+
+.ace-tm .ace_indent-guide-active {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAZSURBVHjaYvj///9/hivKyv8BAAAA//8DACLqBhbvk+/eAAAAAElFTkSuQmCC") right repeat-y;
+}
+
+/*# sourceURL=ace/css/ace-tm */</style><style id="ace_editor.css">
+.ace_br1 {border-top-left-radius    : 3px;}
+.ace_br2 {border-top-right-radius   : 3px;}
+.ace_br3 {border-top-left-radius    : 3px; border-top-right-radius:    3px;}
+.ace_br4 {border-bottom-right-radius: 3px;}
+.ace_br5 {border-top-left-radius    : 3px; border-bottom-right-radius: 3px;}
+.ace_br6 {border-top-right-radius   : 3px; border-bottom-right-radius: 3px;}
+.ace_br7 {border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px;}
+.ace_br8 {border-bottom-left-radius : 3px;}
+.ace_br9 {border-top-left-radius    : 3px; border-bottom-left-radius:  3px;}
+.ace_br10{border-top-right-radius   : 3px; border-bottom-left-radius:  3px;}
+.ace_br11{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-left-radius:  3px;}
+.ace_br12{border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}
+.ace_br13{border-top-left-radius    : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}
+.ace_br14{border-top-right-radius   : 3px; border-bottom-right-radius: 3px; border-bottom-left-radius:  3px;}
+.ace_br15{border-top-left-radius    : 3px; border-top-right-radius:    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px;}
+
+
+.ace_editor {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Source Code Pro', 'source-code-pro', monospace;
+    direction: ltr;
+    text-align: left;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    forced-color-adjust: none;
+}
+
+.ace_scroller {
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+    background-color: inherit;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: text;
+}
+
+.ace_content {
+    position: absolute;
+    box-sizing: border-box;
+    min-width: 100%;
+    contain: style size layout;
+    font-variant-ligatures: no-common-ligatures;
+}
+.ace_invisible {
+    font-variant-ligatures: none;
+}
+
+.ace_keyboard-focus:focus {
+    box-shadow: inset 0 0 0 2px #5E9ED6;
+    outline: none;
+}
+
+.ace_dragging .ace_scroller:before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    background: rgba(250, 250, 250, 0.01);
+    z-index: 1000;
+}
+.ace_dragging.ace_dark .ace_scroller:before{
+    background: rgba(0, 0, 0, 0.01);
+}
+
+.ace_gutter {
+    position: absolute;
+    overflow : hidden;
+    width: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    cursor: default;
+    z-index: 4;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    contain: style size layout;
+}
+
+.ace_gutter-active-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.ace_scroller.ace_scroll-left:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;
+    pointer-events: none;
+}
+
+.ace_gutter-cell, .ace_gutter-cell_svg-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-left: 19px;
+    padding-right: 6px;
+    background-repeat: no-repeat;
+}
+
+.ace_gutter-cell_svg-icons .ace_gutter_annotation {
+    margin-left: -14px;
+    float: left;
+}
+
+.ace_gutter-cell .ace_gutter_annotation {
+    margin-left: -19px;
+    float: left;
+}
+
+.ace_gutter-cell.ace_error, .ace_icon.ace_error, .ace_icon.ace_error_fold, .ace_gutter-cell.ace_security, .ace_icon.ace_security, .ace_icon.ace_security_fold {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABOFBMVEX/////////QRswFAb/Ui4wFAYwFAYwFAaWGAfDRymzOSH/PxswFAb/SiUwFAYwFAbUPRvjQiDllog5HhHdRybsTi3/Tyv9Tir+Syj/UC3////XurebMBIwFAb/RSHbPx/gUzfdwL3kzMivKBAwFAbbvbnhPx66NhowFAYwFAaZJg8wFAaxKBDZurf/RB6mMxb/SCMwFAYwFAbxQB3+RB4wFAb/Qhy4Oh+4QifbNRcwFAYwFAYwFAb/QRzdNhgwFAYwFAbav7v/Uy7oaE68MBK5LxLewr/r2NXewLswFAaxJw4wFAbkPRy2PyYwFAaxKhLm1tMwFAazPiQwFAaUGAb/QBrfOx3bvrv/VC/maE4wFAbRPBq6MRO8Qynew8Dp2tjfwb0wFAbx6eju5+by6uns4uH9/f36+vr/GkHjAAAAYnRSTlMAGt+64rnWu/bo8eAA4InH3+DwoN7j4eLi4xP99Nfg4+b+/u9B/eDs1MD1mO7+4PHg2MXa347g7vDizMLN4eG+Pv7i5evs/v79yu7S3/DV7/498Yv24eH+4ufQ3Ozu/v7+y13sRqwAAADLSURBVHjaZc/XDsFgGIBhtDrshlitmk2IrbHFqL2pvXf/+78DPokj7+Fz9qpU/9UXJIlhmPaTaQ6QPaz0mm+5gwkgovcV6GZzd5JtCQwgsxoHOvJO15kleRLAnMgHFIESUEPmawB9ngmelTtipwwfASilxOLyiV5UVUyVAfbG0cCPHig+GBkzAENHS0AstVF6bacZIOzgLmxsHbt2OecNgJC83JERmePUYq8ARGkJx6XtFsdddBQgZE2nPR6CICZhawjA4Fb/chv+399kfR+MMMDGOQAAAABJRU5ErkJggg==");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+
+.ace_gutter-cell.ace_warning, .ace_icon.ace_warning, .ace_icon.ace_warning_fold {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAmVBMVEX///8AAAD///8AAAAAAABPSzb/5sAAAAB/blH/73z/ulkAAAAAAAD85pkAAAAAAAACAgP/vGz/rkDerGbGrV7/pkQICAf////e0IsAAAD/oED/qTvhrnUAAAD/yHD/njcAAADuv2r/nz//oTj/p064oGf/zHAAAAA9Nir/tFIAAAD/tlTiuWf/tkIAAACynXEAAAAAAAAtIRW7zBpBAAAAM3RSTlMAABR1m7RXO8Ln31Z36zT+neXe5OzooRDfn+TZ4p3h2hTf4t3k3ucyrN1K5+Xaks52Sfs9CXgrAAAAjklEQVR42o3PbQ+CIBQFYEwboPhSYgoYunIqqLn6/z8uYdH8Vmdnu9vz4WwXgN/xTPRD2+sgOcZjsge/whXZgUaYYvT8QnuJaUrjrHUQreGczuEafQCO/SJTufTbroWsPgsllVhq3wJEk2jUSzX3CUEDJC84707djRc5MTAQxoLgupWRwW6UB5fS++NV8AbOZgnsC7BpEAAAAABJRU5ErkJggg==");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+
+.ace_gutter-cell.ace_info, .ace_icon.ace_info, .ace_gutter-cell.ace_hint, .ace_icon.ace_hint {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAAAAAA6mKC9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAJ0Uk5TAAB2k804AAAAPklEQVQY02NgIB68QuO3tiLznjAwpKTgNyDbMegwisCHZUETUZV0ZqOquBpXj2rtnpSJT1AEnnRmL2OgGgAAIKkRQap2htgAAAAASUVORK5CYII=");
+    background-repeat: no-repeat;
+    background-position: 2px center;
+}
+
+.ace_dark .ace_gutter-cell.ace_info, .ace_dark .ace_icon.ace_info, .ace_dark .ace_gutter-cell.ace_hint, .ace_dark .ace_icon.ace_hint {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQBAMAAADt3eJSAAAAJFBMVEUAAAChoaGAgIAqKiq+vr6tra1ZWVmUlJSbm5s8PDxubm56enrdgzg3AAAAAXRSTlMAQObYZgAAAClJREFUeNpjYMAPdsMYHegyJZFQBlsUlMFVCWUYKkAZMxZAGdxlDMQBAG+TBP4B6RyJAAAAAElFTkSuQmCC");
+}
+
+.ace_icon_svg.ace_error {
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAxNiI+CjxnIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSJyZWQiIHNoYXBlLXJlbmRlcmluZz0iZ2VvbWV0cmljUHJlY2lzaW9uIj4KPGNpcmNsZSBmaWxsPSJub25lIiBjeD0iOCIgY3k9IjgiIHI9IjciIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPGxpbmUgeDE9IjExIiB5MT0iNSIgeDI9IjUiIHkyPSIxMSIvPgo8bGluZSB4MT0iMTEiIHkxPSIxMSIgeDI9IjUiIHkyPSI1Ii8+CjwvZz4KPC9zdmc+");
+    background-color: crimson;
+}
+.ace_icon_svg.ace_security {
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0iZGFya29yYW5nZSIgZmlsbD0ibm9uZSIgc2hhcGUtcmVuZGVyaW5nPSJnZW9tZXRyaWNQcmVjaXNpb24iPgogICAgICAgIDxwYXRoIGNsYXNzPSJzdHJva2UtbGluZWpvaW4tcm91bmQiIGQ9Ik04IDE0LjgzMDdDOCAxNC44MzA3IDIgMTIuOTA0NyAyIDguMDg5OTJWMy4yNjU0OEM1LjMxIDMuMjY1NDggNy45ODk5OSAxLjM0OTE4IDcuOTg5OTkgMS4zNDkxOEM3Ljk4OTk5IDEuMzQ5MTggMTAuNjkgMy4yNjU0OCAxNCAzLjI2NTQ4VjguMDg5OTJDMTQgMTIuOTA0NyA4IDE0LjgzMDcgOCAxNC44MzA3WiIvPgogICAgICAgIDxwYXRoIGQ9Ik0yIDguMDg5OTJWMy4yNjU0OEM1LjMxIDMuMjY1NDggNy45ODk5OSAxLjM0OTE4IDcuOTg5OTkgMS4zNDkxOCIvPgogICAgICAgIDxwYXRoIGQ9Ik0xMy45OSA4LjA4OTkyVjMuMjY1NDhDMTAuNjggMy4yNjU0OCA4IDEuMzQ5MTggOCAxLjM0OTE4Ii8+CiAgICAgICAgPHBhdGggY2xhc3M9InN0cm9rZS1saW5lam9pbi1yb3VuZCIgZD0iTTggNFY5Ii8+CiAgICAgICAgPHBhdGggY2xhc3M9InN0cm9rZS1saW5lam9pbi1yb3VuZCIgZD0iTTggMTBWMTIiLz4KICAgIDwvZz4KPC9zdmc+");
+    background-color: crimson;
+}
+.ace_icon_svg.ace_warning {
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAxNiI+CjxnIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSJkYXJrb3JhbmdlIiBzaGFwZS1yZW5kZXJpbmc9Imdlb21ldHJpY1ByZWNpc2lvbiI+Cjxwb2x5Z29uIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiIHBvaW50cz0iOCAxIDE1IDE1IDEgMTUgOCAxIi8+CjxyZWN0IHg9IjgiIHk9IjEyIiB3aWR0aD0iMC4wMSIgaGVpZ2h0PSIwLjAxIi8+CjxsaW5lIHgxPSI4IiB5MT0iNiIgeDI9IjgiIHkyPSIxMCIvPgo8L2c+Cjwvc3ZnPg==");
+    background-color: darkorange;
+}
+.ace_icon_svg.ace_info {
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAxNiI+CjxnIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSJibHVlIiBzaGFwZS1yZW5kZXJpbmc9Imdlb21ldHJpY1ByZWNpc2lvbiI+CjxjaXJjbGUgZmlsbD0ibm9uZSIgY3g9IjgiIGN5PSI4IiByPSI3IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjxwb2x5bGluZSBwb2ludHM9IjggMTEgOCA4Ii8+Cjxwb2x5bGluZSBwb2ludHM9IjkgOCA2IDgiLz4KPGxpbmUgeDE9IjEwIiB5MT0iMTEiIHgyPSI2IiB5Mj0iMTEiLz4KPHJlY3QgeD0iOCIgeT0iNSIgd2lkdGg9IjAuMDEiIGhlaWdodD0iMC4wMSIvPgo8L2c+Cjwvc3ZnPg==");
+    background-color: royalblue;
+}
+.ace_icon_svg.ace_hint {
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAgMTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZyBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0ic2lsdmVyIiBmaWxsPSJub25lIiBzaGFwZS1yZW5kZXJpbmc9Imdlb21ldHJpY1ByZWNpc2lvbiI+CiAgICAgICAgPHBhdGggY2xhc3M9InN0cm9rZS1saW5lam9pbi1yb3VuZCIgZD0iTTYgMTRIMTAiLz4KICAgICAgICA8cGF0aCBkPSJNOCAxMUg5QzkgOS40NzAwMiAxMiA4LjU0MDAyIDEyIDUuNzYwMDJDMTIuMDIgNC40MDAwMiAxMS4zOSAzLjM2MDAyIDEwLjQzIDIuNjcwMDJDOSAxLjY0MDAyIDcuMDAwMDEgMS42NDAwMiA1LjU3MDAxIDIuNjcwMDJDNC42MTAwMSAzLjM2MDAyIDMuOTggNC40MDAwMiA0IDUuNzYwMDJDNCA4LjU0MDAyIDcuMDAwMDEgOS40NzAwMiA3LjAwMDAxIDExSDhaIi8+CiAgICA8L2c+Cjwvc3ZnPg==");
+    background-color: silver;
+}
+
+.ace_icon_svg.ace_error_fold {
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAxNiIgZmlsbD0ibm9uZSI+CiAgPHBhdGggZD0ibSAxOC45Mjk4NTEsNy44Mjk4MDc2IGMgMC4xNDYzNTMsNi4zMzc0NjA0IC02LjMyMzE0Nyw3Ljc3Nzg0NDQgLTcuNDc3OTEyLDcuNzc3ODQ0NCAtMi4xMDcyNzI2LC0wLjEyODc1IDUuMTE3Njc4LDAuMzU2MjQ5IDUuMDUxNjk4LC03Ljg3MDA2MTggLTAuNjA0NjcyLC04LjAwMzk3MzQ5IC03LjA3NzI3MDYsLTcuNTYzMTE4OSAtNC44NTczLC03LjQzMDM5NTU2IDEuNjA2LC0wLjExNTE0MjI1IDYuODk3NDg1LDEuMjYyNTQ1OTYgNy4yODM1MTQsNy41MjI2MTI5NiB6IiBmaWxsPSJjcmltc29uIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0ibSA4LjExNDc1NjIsMi4wNTI5ODI4IGMgMy4zNDkxNjk4LDAgNi4wNjQxMzI4LDIuNjc2ODYyNyA2LjA2NDEzMjgsNS45Nzg5NTMgMCwzLjMwMjExMjIgLTIuNzE0OTYzLDUuOTc4OTIwMiAtNi4wNjQxMzI4LDUuOTc4OTIwMiAtMy4zNDkxNDczLDAgLTYuMDY0MTc3MiwtMi42NzY4MDggLTYuMDY0MTc3MiwtNS45Nzg5MjAyIDAuMDA1MzksLTMuMjk5ODg2MSAyLjcxNzI2NTYsLTUuOTczNjQwOCA2LjA2NDE3NzIsLTUuOTc4OTUzIHogbSAwLC0xLjczNTgyNzE5IGMgLTQuMzIxNDgzNiwwIC03LjgyNDc0MDM4LDMuNDU0MDE4NDkgLTcuODI0NzQwMzgsNy43MTQ3ODAxOSAwLDQuMjYwNzI4MiAzLjUwMzI1Njc4LDcuNzE0NzQ1MiA3LjgyNDc0MDM4LDcuNzE0NzQ1MiA0LjMyMTQ0OTgsMCA3LjgyNDY5OTgsLTMuNDU0MDE3IDcuODI0Njk5OCwtNy43MTQ3NDUyIDAsLTIuMDQ2MDkxNCAtMC44MjQzOTIsLTQuMDA4MzY3MiAtMi4yOTE3NTYsLTUuNDU1MTc0NiBDIDEyLjE4MDIyNSwxLjEyOTk2NDggMTAuMTkwMDEzLDAuMzE3MTU1NjEgOC4xMTQ3NTYyLDAuMzE3MTU1NjEgWiBNIDYuOTM3NDU2Myw4LjI0MDU5ODUgNC42NzE4Njg1LDEwLjQ4NTg1MiA2LjAwODY4MTQsMTEuODc2NzI4IDguMzE3MDAzNSw5LjYwMDc5MTEgMTAuNjI1MzM3LDExLjg3NjcyOCAxMS45NjIxMzgsMTAuNDg1ODUyIDkuNjk2NTUwOCw4LjI0MDU5ODUgMTEuOTYyMTM4LDYuMDA2ODA2NiAxMC41NzMyNDYsNC42Mzc0MzM1IDguMzE3MDAzNSw2Ljg3MzQyOTcgNi4wNjA3NjA3LDQuNjM3NDMzNSA0LjY3MTg2ODUsNi4wMDY4MDY2IFoiIGZpbGw9ImNyaW1zb24iIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=");
+    background-color: crimson;
+}
+.ace_icon_svg.ace_security_fold {
+    -webkit-mask-image: url("data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTcgMTQiIGZpbGw9Im5vbmUiPgogICAgPHBhdGggZD0iTTEwLjAwMDEgMTMuNjk5MkMxMC4wMDAxIDEzLjY5OTIgMTEuOTI0MSAxMy40NzYzIDEzIDEyLjY5OTJDMTQuNDEzOSAxMS42NzgxIDE2IDEwLjUgMTYuMTI1MSA2LjgxMTI2VjIuNTg5ODdDMTYuMTI1MSAyLjU0NzY4IDE2LjEyMjEgMi41MDYxOSAxNi4xMTY0IDIuNDY1NTlWMS43MTQ4NUgxNS4yNDE0TDE1LjIzMDcgMS43MTQ4NEwxNC42MjUxIDEuNjk5MjJWNi44MTEyM0MxNC42MjUxIDguNTEwNjEgMTQuNjI1MSA5LjQ2NDYxIDEyLjc4MjQgMTEuNzIxQzEyLjE1ODYgMTIuNDg0OCAxMC4wMDAxIDEzLjY5OTIgMTAuMDAwMSAxMy42OTkyWiIgZmlsbD0iY3JpbXNvbiIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICA8cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0iTTcuMzM2MDkgMC4zNjc0NzVDNy4wMzIxNCAwLjE1MjY1MiA2LjYyNTQ4IDAuMTUzNjE0IDYuMzIyNTMgMC4zNjk5OTdMNi4zMDg2OSAwLjM3OTU1NEM2LjI5NTUzIDAuMzg4NTg4IDYuMjczODggMC40MDMyNjYgNi4yNDQxNyAwLjQyMjc4OUM2LjE4NDcxIDAuNDYxODYgNi4wOTMyMSAwLjUyMDE3MSA1Ljk3MzEzIDAuNTkxMzczQzUuNzMyNTEgMC43MzQwNTkgNS4zNzk5IDAuOTI2ODY0IDQuOTQyNzkgMS4xMjAwOUM0LjA2MTQ0IDEuNTA5NyAyLjg3NTQxIDEuODgzNzcgMS41ODk4NCAxLjg4Mzc3SDAuNzE0ODQ0VjIuNzU4NzdWNi45ODAxNUMwLjcxNDg0NCA5LjQ5Mzc0IDIuMjg4NjYgMTEuMTk3MyAzLjcwMjU0IDEyLjIxODVDNC40MTg0NSAxMi43MzU1IDUuMTI4NzQgMTMuMTA1MyA1LjY1NzMzIDEzLjM0NTdDNS45MjI4NCAxMy40NjY0IDYuMTQ1NjYgMTMuNTU1OSA2LjMwNDY1IDEzLjYxNjFDNi4zODQyMyAxMy42NDYyIDYuNDQ4MDUgMTMuNjY5IDYuNDkzNDkgMTMuNjg0OEM2LjUxNjIyIDEzLjY5MjcgNi41MzQzOCAxMy42OTg5IDYuNTQ3NjQgMTMuNzAzM0w2LjU2MzgyIDEzLjcwODdMNi41NjkwOCAxMy43MTA0TDYuNTcwOTkgMTMuNzExTDYuODM5ODQgMTMuNzUzM0w2LjU3MjQyIDEzLjcxMTVDNi43NDYzMyAxMy43NjczIDYuOTMzMzUgMTMuNzY3MyA3LjEwNzI3IDEzLjcxMTVMNy4xMDg3IDEzLjcxMUw3LjExMDYxIDEzLjcxMDRMNy4xMTU4NyAxMy43MDg3TDcuMTMyMDUgMTMuNzAzM0M3LjE0NTMxIDEzLjY5ODkgNy4xNjM0NiAxMy42OTI3IDcuMTg2MTkgMTMuNjg0OEM3LjIzMTY0IDEzLjY2OSA3LjI5NTQ2IDEzLjY0NjIgNy4zNzUwMyAxMy42MTYxQzcuNTM0MDMgMTMuNTU1OSA3Ljc1Njg1IDEzLjQ2NjQgOC4wMjIzNiAxMy4zNDU3QzguNTUwOTUgMTMuMTA1MyA5LjI2MTIzIDEyLjczNTUgOS45NzcxNSAxMi4yMTg1QzExLjM5MSAxMS4xOTczIDEyLjk2NDggOS40OTM3NyAxMi45NjQ4IDYuOTgwMThWMi43NTg4QzEyLjk2NDggMi43MTY2IDEyLjk2MTkgMi42NzUxMSAxMi45NTYxIDIuNjM0NTFWMS44ODM3N0gxMi4wODExQzEyLjA3NzUgMS44ODM3NyAxMi4wNzQgMS44ODM3NyAxMi4wNzA0IDEuODgzNzdDMTAuNzk3OSAxLjg4MDA0IDkuNjE5NjIgMS41MTEwMiA4LjczODk0IDEuMTI0ODZDOC43MzUzNCAxLjEyMzI3IDguNzMxNzQgMS4xMjE2OCA4LjcyODE0IDEuMTIwMDlDOC4yOTEwMyAwLjkyNjg2NCA3LjkzODQyIDAuNzM0MDU5IDcuNjk3NzkgMC41OTEzNzNDNy41Nzc3MiAwLjUyMDE3MSA3LjQ4NjIyIDAuNDYxODYgNy40MjY3NiAwLjQyMjc4OUM3LjM5NzA1IDAuNDAzMjY2IDcuMzc1MzkgMC4zODg1ODggNy4zNjIyNCAwLjM3OTU1NEw3LjM0ODk2IDAuMzcwMzVDNy4zNDg5NiAwLjM3MDM1IDcuMzQ4NDcgMC4zNzAwMiA3LjM0NTYzIDAuMzc0MDU0TDcuMzM3NzkgMC4zNjg2NTlMNy4zMzYwOSAwLjM2NzQ3NVpNOC4wMzQ3MSAyLjcyNjkxQzguODYwNCAzLjA5MDYzIDkuOTYwNjYgMy40NjMwOSAxMS4yMDYxIDMuNTg5MDdWNi45ODAxNUgxMS4yMTQ4QzExLjIxNDggOC42Nzk1MyAxMC4xNjM3IDkuOTI1MDcgOC45NTI1NCAxMC43OTk4QzguMzU1OTUgMTEuMjMwNiA3Ljc1Mzc0IDExLjU0NTQgNy4yOTc5NiAxMS43NTI3QzcuMTE2NzEgMTEuODM1MSA2Ljk2MDYyIDExLjg5OTYgNi44Mzk4NCAxMS45NDY5QzYuNzE5MDYgMTEuODk5NiA2LjU2Mjk3IDExLjgzNTEgNi4zODE3MyAxMS43NTI3QzUuOTI1OTUgMTEuNTQ1NCA1LjMyMzczIDExLjIzMDYgNC43MjcxNSAxMC43OTk4QzMuNTE2MDMgOS45MjUwNyAyLjQ2NDg0IDguNjc5NTUgMi40NjQ4NCA2Ljk4MDE4VjMuNTg5MDlDMy43MTczOCAzLjQ2MjM5IDQuODIzMDggMy4wODYzOSA1LjY1MDMzIDIuNzIwNzFDNi4xNDIyOCAyLjUwMzI0IDYuNTQ0ODUgMi4yODUzNyA2LjgzMjU0IDIuMTE2MjRDNy4xMjE4MSAyLjI4NTM1IDcuNTI3IDIuNTAzNTIgOC4wMjE5NiAyLjcyMTMxQzguMDI2MiAyLjcyMzE3IDguMDMwNDUgMi43MjUwNCA4LjAzNDcxIDIuNzI2OTFaTTUuOTY0ODQgMy40MDE0N1Y3Ljc3NjQ3SDcuNzE0ODRWMy40MDE0N0g1Ljk2NDg0Wk01Ljk2NDg0IDEwLjQwMTVWOC42NTE0N0g3LjcxNDg0VjEwLjQwMTVINS45NjQ4NFoiIGZpbGw9ImNyaW1zb24iIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=");
+    background-color: crimson;
+}
+.ace_icon_svg.ace_warning_fold {
+    -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyMCAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNC43NzY5IDE0LjczMzdMOC42NTE5MiAyLjQ4MzY5QzguMzI5NDYgMS44Mzg3NyA3LjQwOTEzIDEuODM4NzcgNy4wODY2NyAyLjQ4MzY5TDAuOTYxNjY5IDE0LjczMzdDMC42NzA3NzUgMTUuMzE1NSAxLjA5MzgzIDE2IDEuNzQ0MjkgMTZIMTMuOTk0M0MxNC42NDQ4IDE2IDE1LjA2NzggMTUuMzE1NSAxNC43NzY5IDE0LjczMzdaTTMuMTYwMDcgMTQuMjVMNy44NjkyOSA0LjgzMTU2TDEyLjU3ODUgMTQuMjVIMy4xNjAwN1pNOC43NDQyOSAxMS42MjVWMTMuMzc1SDYuOTk0MjlWMTEuNjI1SDguNzQ0MjlaTTYuOTk0MjkgMTAuNzVWNy4yNUg4Ljc0NDI5VjEwLjc1SDYuOTk0MjlaIiBmaWxsPSIjRUM3MjExIi8+CjxwYXRoIGQ9Ik0xMS4xOTkxIDIuOTUyMzhDMTAuODgwOSAyLjMxNDY3IDEwLjM1MzcgMS44MDUyNiA5LjcwNTUgMS41MDlMMTEuMDQxIDEuMDY5NzhDMTEuNjg4MyAwLjk0OTgxNCAxMi4zMzcgMS4yNzI2MyAxMi42MzE3IDEuODYxNDFMMTcuNjEzNiAxMS44MTYxQzE4LjM1MjcgMTMuMjkyOSAxNy41OTM4IDE1LjA4MDQgMTYuMDE4IDE1LjU3NDVDMTYuNDA0NCAxNC40NTA3IDE2LjMyMzEgMTMuMjE4OCAxNS43OTI0IDEyLjE1NTVMMTEuMTk5MSAyLjk1MjM4WiIgZmlsbD0iI0VDNzIxMSIvPgo8L3N2Zz4=");
+    background-color: darkorange;
+}
+
+.ace_scrollbar {
+    contain: strict;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 6;
+}
+
+.ace_scrollbar-inner {
+    position: absolute;
+    cursor: text;
+    left: 0;
+    top: 0;
+}
+
+.ace_scrollbar-v{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    top: 0;
+}
+
+.ace_scrollbar-h {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    left: 0;
+}
+
+.ace_print-margin {
+    position: absolute;
+    height: 100%;
+}
+
+.ace_text-input {
+    position: absolute;
+    z-index: 0;
+    width: 0.5em;
+    height: 1em;
+    opacity: 0;
+    background: transparent;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    resize: none;
+    outline: none;
+    overflow: hidden;
+    font: inherit;
+    padding: 0 1px;
+    margin: 0 -1px;
+    contain: strict;
+    -ms-user-select: text;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    user-select: text;
+    /*with `pre-line` chrome inserts &nbsp; instead of space*/
+    white-space: pre!important;
+}
+.ace_text-input.ace_composition {
+    background: transparent;
+    color: inherit;
+    z-index: 1000;
+    opacity: 1;
+}
+.ace_composition_placeholder { color: transparent }
+.ace_composition_marker { 
+    border-bottom: 1px solid;
+    position: absolute;
+    border-radius: 0;
+    margin-top: 1px;
+}
+
+[ace_nocontext=true] {
+    transform: none!important;
+    filter: none!important;
+    clip-path: none!important;
+    mask : none!important;
+    contain: none!important;
+    perspective: none!important;
+    mix-blend-mode: initial!important;
+    z-index: auto;
+}
+
+.ace_layer {
+    z-index: 1;
+    position: absolute;
+    overflow: hidden;
+    /* workaround for chrome bug https://github.com/ajaxorg/ace/issues/2312*/
+    word-wrap: normal;
+    white-space: pre;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    /* setting pointer-events: auto; on node under the mouse, which changes
+        during scroll, will break mouse wheel scrolling in Safari */
+    pointer-events: none;
+}
+
+.ace_gutter-layer {
+    position: relative;
+    width: auto;
+    text-align: right;
+    pointer-events: auto;
+    height: 1000000px;
+    contain: style size layout;
+}
+
+.ace_text-layer {
+    font: inherit !important;
+    position: absolute;
+    height: 1000000px;
+    width: 1000000px;
+    contain: style size layout;
+}
+
+.ace_text-layer > .ace_line, .ace_text-layer > .ace_line_group {
+    contain: style size layout;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.ace_hidpi .ace_text-layer,
+.ace_hidpi .ace_gutter-layer,
+.ace_hidpi .ace_content,
+.ace_hidpi .ace_gutter {
+    contain: strict;
+}
+.ace_hidpi .ace_text-layer > .ace_line, 
+.ace_hidpi .ace_text-layer > .ace_line_group {
+    contain: strict;
+}
+
+.ace_cjk {
+    display: inline-block;
+    text-align: center;
+}
+
+.ace_cursor-layer {
+    z-index: 4;
+}
+
+.ace_cursor {
+    z-index: 4;
+    position: absolute;
+    box-sizing: border-box;
+    border-left: 2px solid;
+    /* workaround for smooth cursor repaintng whole screen in chrome */
+    transform: translatez(0);
+}
+
+.ace_multiselect .ace_cursor {
+    border-left-width: 1px;
+}
+
+.ace_slim-cursors .ace_cursor {
+    border-left-width: 1px;
+}
+
+.ace_overwrite-cursors .ace_cursor {
+    border-left-width: 0;
+    border-bottom: 1px solid;
+}
+
+.ace_hidden-cursors .ace_cursor {
+    opacity: 0.2;
+}
+
+.ace_hasPlaceholder .ace_hidden-cursors .ace_cursor {
+    opacity: 0;
+}
+
+.ace_smooth-blinking .ace_cursor {
+    transition: opacity 0.18s;
+}
+
+.ace_animate-blinking .ace_cursor {
+    animation-duration: 1000ms;
+    animation-timing-function: step-end;
+    animation-name: blink-ace-animate;
+    animation-iteration-count: infinite;
+}
+
+.ace_animate-blinking.ace_smooth-blinking .ace_cursor {
+    animation-duration: 1000ms;
+    animation-timing-function: ease-in-out;
+    animation-name: blink-ace-animate-smooth;
+}
+    
+@keyframes blink-ace-animate {
+    from, to { opacity: 1; }
+    60% { opacity: 0; }
+}
+
+@keyframes blink-ace-animate-smooth {
+    from, to { opacity: 1; }
+    45% { opacity: 1; }
+    60% { opacity: 0; }
+    85% { opacity: 0; }
+}
+
+.ace_marker-layer .ace_step, .ace_marker-layer .ace_stack {
+    position: absolute;
+    z-index: 3;
+}
+
+.ace_marker-layer .ace_selection {
+    position: absolute;
+    z-index: 5;
+}
+
+.ace_marker-layer .ace_bracket {
+    position: absolute;
+    z-index: 6;
+}
+
+.ace_marker-layer .ace_error_bracket {
+    position: absolute;
+    border-bottom: 1px solid #DE5555;
+    border-radius: 0;
+}
+
+.ace_marker-layer .ace_active-line {
+    position: absolute;
+    z-index: 2;
+}
+
+.ace_marker-layer .ace_selected-word {
+    position: absolute;
+    z-index: 4;
+    box-sizing: border-box;
+}
+
+.ace_line .ace_fold {
+    box-sizing: border-box;
+
+    display: inline-block;
+    height: 11px;
+    margin-top: -2px;
+    vertical-align: middle;
+
+    background-image:
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACJJREFUeNpi+P//fxgTAwPDBxDxD078RSX+YeEyDFMCIMAAI3INmXiwf2YAAAAASUVORK5CYII=");
+    background-repeat: no-repeat, repeat-x;
+    background-position: center center, top left;
+    color: transparent;
+
+    border: 1px solid black;
+    border-radius: 2px;
+
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.ace_dark .ace_fold {
+}
+
+.ace_fold:hover{
+    background-image:
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAJCAYAAADU6McMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJpJREFUeNpi/P//PwOlgAXGYGRklAVSokD8GmjwY1wasKljQpYACtpCFeADcHVQfQyMQAwzwAZI3wJKvCLkfKBaMSClBlR7BOQikCFGQEErIH0VqkabiGCAqwUadAzZJRxQr/0gwiXIal8zQQPnNVTgJ1TdawL0T5gBIP1MUJNhBv2HKoQHHjqNrA4WO4zY0glyNKLT2KIfIMAAQsdgGiXvgnYAAAAASUVORK5CYII="),
+        url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA3CAYAAADNNiA5AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACBJREFUeNpi+P//fz4TAwPDZxDxD5X4i5fLMEwJgAADAEPVDbjNw87ZAAAAAElFTkSuQmCC");
+}
+
+.ace_tooltip {
+    background-color: #f5f5f5;
+    border: 1px solid gray;
+    border-radius: 1px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: black;
+    padding: 3px 4px;
+    position: absolute;
+    z-index: 999999;
+    box-sizing: border-box;
+    cursor: default;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: normal;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: normal;
+    pointer-events: none;
+    overflow: auto;
+    max-width: min(33em, 66vw);
+    overscroll-behavior: contain;
+}
+.ace_tooltip pre {
+    white-space: pre-wrap;
+}
+
+.ace_tooltip.ace_dark {
+    background-color: #636363;
+    color: #fff;
+}
+
+.ace_tooltip:focus {
+    outline: 1px solid #5E9ED6;
+}
+
+.ace_icon {
+    display: inline-block;
+    width: 18px;
+    vertical-align: top;
+}
+
+.ace_icon_svg {
+    display: inline-block;
+    width: 12px;
+    vertical-align: top;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 12px;
+    -webkit-mask-position: center;
+}
+
+.ace_folding-enabled > .ace_gutter-cell, .ace_folding-enabled > .ace_gutter-cell_svg-icons {
+    padding-right: 13px;
+}
+
+.ace_fold-widget, .ace_custom-widget {
+    box-sizing: border-box;
+
+    margin: 0 -12px 0 1px;
+    display: none;
+    width: 11px;
+    vertical-align: top;
+
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42mWKsQ0AMAzC8ixLlrzQjzmBiEjp0A6WwBCSPgKAXoLkqSot7nN3yMwR7pZ32NzpKkVoDBUxKAAAAABJRU5ErkJggg==");
+    background-repeat: no-repeat;
+    background-position: center;
+
+    border-radius: 3px;
+    
+    border: 1px solid transparent;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.ace_custom-widget {
+    background: none;
+}
+
+.ace_folding-enabled .ace_fold-widget {
+    display: inline-block;   
+}
+
+.ace_fold-widget.ace_end {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAANElEQVR42m3HwQkAMAhD0YzsRchFKI7sAikeWkrxwScEB0nh5e7KTPWimZki4tYfVbX+MNl4pyZXejUO1QAAAABJRU5ErkJggg==");
+}
+
+.ace_fold-widget.ace_closed {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAGCAYAAAAG5SQMAAAAOUlEQVR42jXKwQkAMAgDwKwqKD4EwQ26sSOkVWjgIIHAzPiCgaqiqnJHZnKICBERHN194O5b9vbLuAVRL+l0YWnZAAAAAElFTkSuQmCCXA==");
+}
+
+.ace_fold-widget:hover {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.ace_fold-widget:active {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+/**
+ * Dark version for fold widgets
+ */
+.ace_dark .ace_fold-widget {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHklEQVQIW2P4//8/AzoGEQ7oGCaLLAhWiSwB146BAQCSTPYocqT0AAAAAElFTkSuQmCC");
+}
+.ace_dark .ace_fold-widget.ace_end {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAH0lEQVQIW2P4//8/AxQ7wNjIAjDMgC4AxjCVKBirIAAF0kz2rlhxpAAAAABJRU5ErkJggg==");
+}
+.ace_dark .ace_fold-widget.ace_closed {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAHElEQVQIW2P4//+/AxAzgDADlOOAznHAKgPWAwARji8UIDTfQQAAAABJRU5ErkJggg==");
+}
+.ace_dark .ace_fold-widget:hover {
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.ace_dark .ace_fold-widget:active {
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.ace_inline_button {
+    border: 1px solid lightgray;
+    display: inline-block;
+    margin: -1px 8px;
+    padding: 0 5px;
+    pointer-events: auto;
+    cursor: pointer;
+}
+.ace_inline_button:hover {
+    border-color: gray;
+    background: rgba(200,200,200,0.2);
+    display: inline-block;
+    pointer-events: auto;
+}
+
+.ace_fold-widget.ace_invalid {
+    background-color: #FFB4B4;
+    border-color: #DE5555;
+}
+
+.ace_fade-fold-widgets .ace_fold-widget {
+    transition: opacity 0.4s ease 0.05s;
+    opacity: 0;
+}
+
+.ace_fade-fold-widgets:hover .ace_fold-widget {
+    transition: opacity 0.05s ease 0.05s;
+    opacity:1;
+}
+
+.ace_underline {
+    text-decoration: underline;
+}
+
+.ace_bold {
+    font-weight: bold;
+}
+
+.ace_nobold .ace_bold {
+    font-weight: normal;
+}
+
+.ace_italic {
+    font-style: italic;
+}
+
+
+.ace_error-marker {
+    background-color: rgba(255, 0, 0,0.2);
+    position: absolute;
+    z-index: 9;
+}
+
+.ace_highlight-marker {
+    background-color: rgba(255, 255, 0,0.2);
+    position: absolute;
+    z-index: 8;
+}
+
+.ace_mobile-menu {
+    position: absolute;
+    line-height: 1.5;
+    border-radius: 4px;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: white;
+    box-shadow: 1px 3px 2px grey;
+    border: 1px solid #dcdcdc;
+    color: black;
+}
+.ace_dark > .ace_mobile-menu {
+    background: #333;
+    color: #ccc;
+    box-shadow: 1px 3px 2px grey;
+    border: 1px solid #444;
+
+}
+.ace_mobile-button {
+    padding: 2px;
+    cursor: pointer;
+    overflow: hidden;
+}
+.ace_mobile-button:hover {
+    background-color: #eee;
+    opacity:1;
+}
+.ace_mobile-button:active {
+    background-color: #ddd;
+}
+
+.ace_placeholder {
+    position: relative;
+    font-family: arial;
+    transform: scale(0.9);
+    transform-origin: left;
+    white-space: pre;
+    opacity: 0.7;
+    margin: 0 10px;
+    z-index: 1;
+}
+
+.ace_ghost_text {
+    opacity: 0.5;
+    font-style: italic;
+}
+
+.ace_ghost_text_container > div {
+    white-space: pre;
+}
+
+.ghost_text_line_wrapped::after {
+    content: "↩";
+    position: absolute;
+}
+
+.ace_lineWidgetContainer.ace_ghost_text {
+    margin: 0px 4px
+}
+
+.ace_screenreader-only {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+
+.ace_hidden_token {
+    display: none;
+}
+/*# sourceURL=ace/css/ace_editor.css */</style><style id="ace_scrollbar.css">.ace_editor>.ace_sb-v div, .ace_editor>.ace_sb-h div{
+  position: absolute;
+  background: rgba(128, 128, 128, 0.6);
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+  z-index: 8;
+}
+.ace_editor>.ace_sb-v, .ace_editor>.ace_sb-h {
+  position: absolute;
+  z-index: 6;
+  background: none;
+  overflow: hidden!important;
+}
+.ace_editor>.ace_sb-v {
+  z-index: 6;
+  right: 0;
+  top: 0;
+  width: 12px;
+}
+.ace_editor>.ace_sb-v div {
+  z-index: 8;
+  right: 0;
+  width: 100%;
+}
+.ace_editor>.ace_sb-h {
+  bottom: 0;
+  left: 0;
+  height: 12px;
+}
+.ace_editor>.ace_sb-h div {
+  bottom: 0;
+  height: 100%;
+}
+.ace_editor>.ace_sb_grabbed {
+  z-index: 8;
+  background: #000;
+}
+/*# sourceURL=ace/css/ace_scrollbar.css */</style>
+    
+    
+
+    <title>Videostore - 2 Config - Jenkins</title><link rel="stylesheet" href="./Videostore - 2 Config - Jenkins_files/styles.css" type="text/css"><link rel="stylesheet" href="./Videostore - 2 Config - Jenkins_files/responsive-grid.css" type="text/css"><link rel="icon" href="http://localhost:8080/static/ae5d0940/favicon.svg" type="image/svg+xml"><link sizes="any" rel="alternate icon" href="http://localhost:8080/static/ae5d0940/favicon.ico"><link sizes="180x180" rel="apple-touch-icon" href="http://localhost:8080/static/ae5d0940/apple-touch-icon.png"><link color="#191717" rel="mask-icon" href="http://localhost:8080/static/ae5d0940/mask-icon.svg"><script src="./Videostore - 2 Config - Jenkins_files/behavior.js.download" type="text/javascript"></script><script src="./Videostore - 2 Config - Jenkins_files/bind.js.download" type="text/javascript"></script><script src="./Videostore - 2 Config - Jenkins_files/hudson-behavior.js.download" type="text/javascript"></script><script src="./Videostore - 2 Config - Jenkins_files/sortable.js.download" type="text/javascript"></script><link rel="search" href="http://localhost:8080/opensearch.xml" type="application/opensearchdescription+xml" title="Jenkins"><meta name="ROBOTS" content="INDEX,NOFOLLOW"><meta name="viewport" content="width=device-width, initial-scale=1"><script defer="true" src="./Videostore - 2 Config - Jenkins_files/section-to-sidebar-items.js.download" type="text/javascript"></script><script src="./Videostore - 2 Config - Jenkins_files/validate.js.download" type="text/javascript"></script><script id="theme-manager-theme" type="application/json">{ "id": "none", "respect_system_appearance":  false }</script>
+  <link type="text/css" rel="stylesheet" href="./Videostore - 2 Config - Jenkins_files/theme.css">
+<script id="theme-manager-properties" type="application/json">{}</script>
+  <link rel="stylesheet" href="./Videostore - 2 Config - Jenkins_files/main.css" type="text/css"><script src="./Videostore - 2 Config - Jenkins_files/main.js.download" type="text/javascript"></script><template id="account-theme-picker-template"></template><script src="./Videostore - 2 Config - Jenkins_files/vendors.js.download" type="text/javascript"></script><script src="./Videostore - 2 Config - Jenkins_files/sortable-drag-drop.js.download" type="text/javascript"></script><script defer="true" src="./Videostore - 2 Config - Jenkins_files/app.js.download" type="text/javascript"></script><link rel="stylesheet" href="./Videostore - 2 Config - Jenkins_files/skeleton.css" type="text/css"><link rel="stylesheet" href="./Videostore - 2 Config - Jenkins_files/textarea.css" type="text/css"><link rel="stylesheet" href="./Videostore - 2 Config - Jenkins_files/workflow-editor.css" type="text/css"></head><body data-model-type="org.jenkinsci.plugins.workflow.job.WorkflowJob" id="jenkins" data-search-url="/search/suggest" data-search-help-url="https://www.jenkins.io/redirect/search-box" class="two-column jenkins-2.528.1" data-version="2.528.1"><div data-help="Help" data-no-results-for="No results for" id="command-palette-i18n" class="i18n" data-get-help="Get help using Jenkins search"></div><dialog id="command-palette" class="jenkins-command-palette__dialog"><div class="jenkins-command-palette__wrapper"><div class="jenkins-command-palette"><div class="jenkins-search-container"><div class="jenkins-search  jenkins-command-palette__search"><div class="jenkins-search__icon"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><title></title><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path><path d="M338.29 338.29L448 448" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"></path></svg></div><input autocorrect="off" autocomplete="off" spellcheck="false" id="command-bar" placeholder="Search" type="search" class="jenkins-input jenkins-search__input" autocapitalize="off"></div></div><div id="search-results-container" class="jenkins-command-palette__results-container"><div id="search-results" class="jenkins-command-palette__results"></div></div></div></div></dialog><a href="http://localhost:8080/job/Videostore%20-%202/configure#skip2content" class="jenkins-skip-link">Skip to content</a><header id="page-header" class="jenkins-header" style="--background-opacity: 0%; --background-blur: 0px;"><div class="jenkins-header__main"><div class="jenkins-header__navigation"><a href="http://localhost:8080/" class="app-jenkins-logo"><img src="./Videostore - 2 Config - Jenkins_files/logo.svg" aria-hidden="true" id="jenkins-head-icon"><span class="jenkins-mobile-hide">Jenkins</span></a><div id="breadcrumbBar" class="jenkins-breadcrumbs" aria-label="breadcrumb"><ol class="jenkins-breadcrumbs__list" id="breadcrumbs"><li data-type="breadcrumb-item" class="jenkins-breadcrumbs__list-item" data-has-menu="true"><a href="http://localhost:8080/job/Videostore%20-%202/">Videostore - 2</a><div data-iscurrent="false" data-children="true" tabindex="0" data-model="true" data-base="/job/Videostore%20-%202/configure" class="dropdown-indicator" aria-label="dropdown menu for Videostore - 2" data-href="/job/Videostore%20-%202/" aria-expanded="false"><svg class="icon-sm jenkins-!-text-color-secondary" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><title></title><path d="M112 184l144 144 144-144" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"></path></svg></div></li><li aria-current="page" data-type="breadcrumb-item" class="jenkins-breadcrumbs__list-item"><span>Configuration</span></li></ol></div></div></div><div class="jenkins-header__actions"><!--rendering primary action: jenkins.model.navigation.SearchAction--><button data-dropdown="false" id="root-action-SearchAction" href="" data-html-tooltip="&lt;div class=&quot;jenkins-keyboard-shortcut__tooltip&quot;&gt;&lt;span class=&quot;jenkins-!-margin-right-1&quot;&gt;Search&lt;/span&gt;&lt;div class=&quot;jenkins-keyboard-shortcut&quot;&gt;CTRL+K&lt;/div&gt;&lt;/div&gt;" data-tooltip-interactive="false" data-tippy-animation="tooltip" data-tippy-theme="tooltip" data-tippy-trigger="mouseenter focus" data-tippy-touch="false" data-type="header-action" draggable="false" class="jenkins-button jenkins-button--tertiary"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><title></title><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path><path d="M338.29 338.29L448 448" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"></path></svg><span class="jenkins-visually-hidden" data-type="action-label">Search</span></button><!--rendering primary action: hudson.model.ManageJenkinsAction--><a data-dropdown="false" id="root-action-ManageJenkinsAction" href="http://localhost:8080/manage" data-html-tooltip="&lt;div style=&quot;text-align: center;&quot;&gt;Manage Jenkins&lt;/div&gt;&lt;div style=&quot;text-align: center; color: var(--text-color-secondary)&quot;&gt;One or more notifications&lt;/div&gt;" data-tooltip-interactive="false" data-tippy-animation="tooltip" data-tippy-theme="tooltip" data-tippy-trigger="mouseenter focus" data-tippy-touch="false" data-type="header-action" draggable="false" class="jenkins-button jenkins-button--tertiary"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" height="512px" version="1.1" viewBox="0 0 512 512" width="512px">    <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">        <g stroke="currentColor" stroke-width="32" transform="translate(50.378500, 42.000000)">            <path d="M211.9115,150.31 C185.005783,147.652748 159.332619,162.189611 147.769706,186.628874 C136.206793,211.068138 141.24875,240.137201 160.366525,259.254975 C179.484299,278.37275 208.553362,283.414707 232.992626,271.851794 C257.431889,260.288881 271.968752,234.615717 269.3115,207.71 C266.263249,177.360931 242.260569,153.358251 211.9115,150.31 L211.9115,150.31 Z M410.9165,277.125 C411.707607,281.564887 410.903766,286.141508 408.647035,290.04607 L372.853966,351.97469 C370.607176,355.862053 367.040281,358.81433 362.8015,360.295 C358.482479,361.803699 353.868429,362.272089 349.334332,361.662103 L320.522752,357.785994 C299.879684,355.00882 279.988607,366.61094 272.243485,385.946453 L261.688643,412.296365 C259.969284,416.588704 257.239668,420.402837 253.7315,423.415 C250.285888,426.373452 245.894629,428 241.353189,428 L169.796876,428 C165.308275,428 160.960823,426.431216 157.5065,423.565 C153.996701,420.652754 151.25415,416.924675 149.518855,412.70702 L138.358864,385.582532 C130.453683,366.368896 110.519057,354.968685 89.9503733,357.89869 L61.8696222,361.898788 C57.3434346,362.543543 52.7286498,362.09476 48.4115003,360.59 C44.1729946,359.112652 40.6059709,356.162306 38.3598585,352.276117 L2.56596537,290.34607 C0.309233973,286.441508 -0.494606827,281.864887 0.296500273,277.425 C1.10103427,272.909758 2.99390287,268.65863 5.81124857,265.039618 L23.4896432,242.330895 C36.4067894,225.738218 36.3997393,202.490855 23.4725314,185.906016 L5.73914207,163.155131 C2.93726987,159.560495 1.06449867,155.330725 0.286500273,150.84 C-0.479118527,146.420732 0.330889273,141.87293 2.57525137,137.989769 L38.3890342,76.0253095 C40.6358245,72.1379474 44.2027191,69.1856702 48.4415003,67.705 C52.7614677,66.1959703 57.3747149,65.7192136 61.9119868,66.3128907 L91.2373143,70.1499486 C111.792442,72.839474 131.546967,61.2195013 139.18365,41.9470371 L149.578712,15.7133384 C151.281675,11.4156234 154.004147,7.5964633 157.5115,4.585 C160.957112,1.6265481 165.348371,0 169.889811,0 L241.446124,0 C245.934725,0 250.282177,1.5687841 253.7365,4.435 C257.245602,7.3466683 259.982278,11.0789954 261.704008,15.3012287 L272.612929,42.053395 C280.490247,61.3711009 300.470109,72.8820729 321.133157,70.007291 L349.370217,66.0787615 C353.899388,65.4486329 358.513486,65.904939 362.8315,67.41 C367.070006,68.8873483 370.637029,71.837694 372.883142,75.7238833 L408.677035,137.65393 C410.933766,141.558492 411.737607,146.135113 410.9465,150.575 C410.140427,155.098876 408.314604,159.379748 405.607548,163.092841 L385.561411,190.588825 C373.755974,206.781577 374.583692,228.954539 387.563545,244.222054 L405.168289,264.929585 C408.130553,268.41394 410.114244,272.622543 410.9165,277.125 Z"></path>        </g>    </g></svg><span class="jenkins-visually-hidden" data-type="action-label">Manage Jenkins</span><span class="jenkins-badge jenkins-!-danger-color"></span></a><!--rendering primary action: jenkins.model.navigation.UserAction--><a data-dropdown="true" id="root-action-UserAction" href="http://localhost:8080/user/admin" data-tippy-offset="[0, 10]" data-tooltip-interactive="true" data-tippy-animation="tooltip" data-tippy-theme="dropdown" data-tippy-trigger="mouseenter focus" data-tippy-touch="true" data-type="header-action" draggable="false" class="jenkins-button jenkins-button--tertiary" aria-expanded="false"><svg class="jenkins-avatar" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" height="512" viewBox="0 0 512 512" width="512">  <path d="M 259.24942 23.021637 C 128.221512 21.251862 21.253086 128.220276 23.022827 259.24823 C 24.770166 384.910919 127.090225 487.230988 252.75293 488.978302 C 383.803253 490.770447 490.749237 383.802032 488.957123 252.774109 C 487.232178 127.08902 384.912109 24.768951 259.24942 23.021637 Z M 400.850983 389.570496 C 399.947693 390.547302 398.656952 391.072144 397.328308 391.002899 C 395.999664 390.933685 394.770477 390.277466 393.973633 389.212036 C 383.955017 376.104187 371.685822 364.881744 357.73877 356.068665 C 329.221344 337.766418 293.08728 327.685608 256.00116 327.685608 C 218.915054 327.685608 182.781006 337.766418 154.263565 356.068665 C 140.317032 364.877808 128.047821 376.096497 118.028717 389.200867 C 117.231857 390.266296 116.002693 390.922485 114.674026 390.99173 C 113.345375 391.060944 112.054665 390.536102 111.151367 389.559265 C 78.284332 354.078979 59.666458 307.717773 58.86565 259.360229 C 57.039909 150.364441 146.478943 59.13327 255.519547 58.864441 C 364.56012 58.595642 453.136688 147.13858 453.136688 255.999969 C 453.174255 305.523621 434.498657 353.232788 400.850983 389.570496 Z" fill="currentColor" stroke="none"></path>  <path d="M 256 144 C 236.279999 144 218.449997 151.390015 205.779999 164.820007 C 193.110001 178.25 186.779999 196.820007 188.210007 216.75 C 191.110001 256 221.520004 288 256 288 C 290.480011 288 320.829987 256 323.790009 216.76001 C 325.269989 197.02002 318.98999 178.619995 306.109985 164.940002 C 293.390015 151.440002 275.589996 144 256 144 Z" fill="currentColor" stroke="none"></path></svg><span class="jenkins-visually-hidden" data-type="action-label">admin</span></a><template></template></div></header><script src="./Videostore - 2 Config - Jenkins_files/header.js.download" type="text/javascript"></script><script src="./Videostore - 2 Config - Jenkins_files/keyboard-shortcuts.js.download" type="text/javascript"></script><div id="page-body" class="app-page-body app-page-body--two-column clear"><div id="side-panel" class="app-page-body__sidebar app-page-body__sidebar--sticky"><div class="jenkins-app-bar "><div class="jenkins-app-bar__content"><h1>
+          Configure
+          </h1></div><div class="jenkins-app-bar__controls"></div></div><div id="tasks"><div class="task">
+            <span class="task-link-wrapper">
+                <button data-section-id="general" class="task-link task-link--active">
+                    <span class="task-icon-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M262.29 192.31a64 64 0 1057.4 57.4 64.13 64.13 0 00-57.4-57.4zM416.39 256a154.34 154.34 0 01-1.53 20.79l45.21 35.46a10.81 10.81 0 012.45 13.75l-42.77 74a10.81 10.81 0 01-13.14 4.59l-44.9-18.08a16.11 16.11 0 00-15.17 1.75A164.48 164.48 0 01325 400.8a15.94 15.94 0 00-8.82 12.14l-6.73 47.89a11.08 11.08 0 01-10.68 9.17h-85.54a11.11 11.11 0 01-10.69-8.87l-6.72-47.82a16.07 16.07 0 00-9-12.22 155.3 155.3 0 01-21.46-12.57 16 16 0 00-15.11-1.71l-44.89 18.07a10.81 10.81 0 01-13.14-4.58l-42.77-74a10.8 10.8 0 012.45-13.75l38.21-30a16.05 16.05 0 006-14.08c-.36-4.17-.58-8.33-.58-12.5s.21-8.27.58-12.35a16 16 0 00-6.07-13.94l-38.19-30A10.81 10.81 0 0149.48 186l42.77-74a10.81 10.81 0 0113.14-4.59l44.9 18.08a16.11 16.11 0 0015.17-1.75A164.48 164.48 0 01187 111.2a15.94 15.94 0 008.82-12.14l6.73-47.89A11.08 11.08 0 01213.23 42h85.54a11.11 11.11 0 0110.69 8.87l6.72 47.82a16.07 16.07 0 009 12.22 155.3 155.3 0 0121.46 12.57 16 16 0 0015.11 1.71l44.89-18.07a10.81 10.81 0 0113.14 4.58l42.77 74a10.8 10.8 0 01-2.45 13.75l-38.21 30a16.05 16.05 0 00-6.05 14.08c.33 4.14.55 8.3.55 12.47z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
+                    </span>
+                    <span class="task-link-text">
+                        
+          General
+          
+                    </span>
+                </button>
+            </span>
+        </div><div class="task">
+            <span class="task-link-wrapper">
+                <button data-section-id="triggers" class="task-link">
+                    <span class="task-icon-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><path d="M112.91 128A191.85 191.85 0 0064 254c-1.18 106.35 85.65 193.8 192 194 106.2.2 192-85.83 192-192 0-104.54-83.55-189.61-187.5-192a4.36 4.36 0 00-4.5 4.37V152" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path><path d="M233.38 278.63l-79-113a8.13 8.13 0 0111.32-11.32l113 79a32.5 32.5 0 01-37.25 53.26 33.21 33.21 0 01-8.07-7.94z" fill="currentColor"></path></svg>
+                    </span>
+                    <span class="task-link-text">
+                        
+          Triggers
+        
+                    </span>
+                </button>
+            </span>
+        </div><div class="task">
+            <span class="task-link-wrapper">
+                <button data-section-id="pipeline" class="task-link">
+                    <span class="task-icon-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" height="468px" version="1.1" viewBox="0 0 468 468" width="468px">    <g fill="none" fill-rule="evenodd" stroke="none" stroke-linecap="round" stroke-width="1">        <path d="M69,414 L69,284 C69,228.771525 113.771525,184 169,184 L273,184 C287.359403,184 299,172.359403 299,158 L299,54 L299,54 M399,54 L399,184 C399,239.228475 354.228475,284 299,284 L195,284 C180.640597,284 169,295.640597 169,310 L169,414 L169,414" stroke="currentColor" stroke-width="32"></path>    </g></svg>
+                    </span>
+                    <span class="task-link-text">
+                                        
+          Pipeline
+        
+                    </span>
+                </button>
+            </span>
+        </div><div class="task">
+            <span class="task-link-wrapper">
+                <button data-section-id="advanced" class="task-link">
+                    <span class="task-icon-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><title></title><path d="M393.87 190a32.1 32.1 0 01-45.25 0l-26.57-26.57a32.09 32.09 0 010-45.26L382.19 58a1 1 0 00-.3-1.64c-38.82-16.64-89.15-8.16-121.11 23.57-30.58 30.35-32.32 76-21.12 115.84a31.93 31.93 0 01-9.06 32.08L64 380a48.17 48.17 0 1068 68l153.86-167a31.93 31.93 0 0131.6-9.13c39.54 10.59 84.54 8.6 114.72-21.19 32.49-32 39.5-88.56 23.75-120.93a1 1 0 00-1.6-.26z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"></path><circle cx="96" cy="416" fill="currentColor" r="16"></circle></svg>
+                    </span>
+                    <span class="task-link-text">
+                        
+          Advanced
+        
+                    </span>
+                </button>
+            </span>
+        </div></div></div><div id="main-panel"><a id="skip2content"></a><!--
+start of main content ⇒
+--><form method="post" autocomplete="off" name="config" action="http://localhost:8080/job/Videostore%20-%202/configSubmit" class="jenkins-form"><div width="100%" class="config-table"><div class="jenkins-app-bar "><div class="jenkins-app-bar__content"><h2 id="general">
+          General
+          </h2></div><div class="jenkins-app-bar__controls"><span tooltip="Enable or disable the current project" id="toggle-switch-enable-disable-project" class="jenkins-toggle-switch jenkins-toggle-switch--invert-label" title="Enable or disable the current project"><input name="enable" checked="true" id="enable-disable-project" type="checkbox" value="true" class="jenkins-toggle-switch__input  "><label data-title="Disabled" data-checked-title="Enabled" for="enable-disable-project" class="jenkins-toggle-switch__label "><span class="jenkins-toggle-switch__label__unchecked-title">Disabled</span><span class="jenkins-toggle-switch__label__checked-title">Enabled</span></label></span></div></div><div class="jenkins-section jenkins-section--no-border jenkins-!-margin-top-3"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Description</div><div class="setting-main"><script src="./Videostore - 2 Config - Jenkins_files/textarea.js.download" type="text/javascript"></script><textarea name="description" rows="5" class="jenkins-input   "></textarea><div class="textarea-preview-container">Plain text<a previewendpoint="/markupFormatter/previewDescription" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="textarea-show-preview">Preview</a><a href="http://localhost:8080/job/Videostore%20-%202/configure#" class="textarea-hide-preview" style="display: none;">Hide preview</a></div><div class="textarea-preview" style="display: none;"></div></div><div class="validation-error-area"></div></div></div><div name="properties" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart24"></div><section class="" nameref="rowSetStart24"><div class="stapler-class-bag tr"><div><input type="hidden" name="stapler-class-bag" value="true"></div></div><div name="jenkins-model-BuildDiscarderProperty" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart14"></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight" nameref="rowSetStart14"><div class="help-sibling tr optional-block-start row-group-start " hashelp="true" ref="cb0"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="specified" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb0"><label class="attach-previous ">Discard old builds</label></span><a helpurl="/descriptor/jenkins.model.BuildDiscarderProperty/help" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Discard old builds" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr form-container--hidden" style="display: none;"></div><div class="form-container tr form-container--hidden" style="display: none;"><div class="jenkins-form-item"><div class="jenkins-form-label help-sibling">
+            Strategy
+            </div><div class="jenkins-select"><select class="jenkins-select__input dropdownList"><option value="0">Log Rotation</option></select></div></div><div class="dropdownList-container tr"><div><div width="100%" name="strategy"><div class="dropdownList-start rowvg-start tr"></div><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Days to keep builds</div><div class="jenkins-form-description">if not empty, build records are only kept up to this number of days</div><div class="setting-main"><input step="1" min="1" name="_.daysToKeepStr" type="number" class="jenkins-input  positive-number" value=""></div><div class="validation-error-area" style="height: 0px;"><div></div></div></div><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Max # of builds to keep</div><div class="jenkins-form-description">if not empty, only up to this number of build records are kept</div><div class="setting-main"><input step="1" min="1" name="_.numToKeepStr" type="number" class="jenkins-input  positive-number" value=""></div><div class="validation-error-area" style="height: 0px;"><div></div></div></div><div class="jenkins-form-item tr"><script src="./Videostore - 2 Config - Jenkins_files/advanced.js.download" type="text/javascript"></script><div class="advancedLink jenkins-buttons-row"><button type="button" class="jenkins-button advanced-button advancedButton">
+        Advanced
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><title></title><path d="M112 184l144 144 144-144" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"></path></svg></button><span tooltip="One or more fields in this block have been edited." id="id148" class="jenkins-edited-section-label jenkins-hidden" title="One or more fields in this block have been edited."><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" height="512px" version="1.1" viewBox="0 0 512 512" width="512px">    <title></title>    <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">        <path d="M399.608914,57 C413.784791,57 427.960684,62.4078333 438.776426,73.2235621 C449.592141,84.0392638 455,98.2149574 455,112.390686 C455,126.566468 449.592105,140.742274 438.776426,151.558078 L438.776426,151.558078 L191.040603,399.293596 C182.232434,408.101755 171.575528,414.840664 159.841736,419.022244 L159.841736,419.022244 L58.9309718,454.983885 C58.3980325,455.005817 57.9083807,454.793595 57.5574476,454.442654 C57.2063668,454.091565 56.9941379,453.601684 57.0161199,453.068522 L57.0161199,453.068522 L92.977296,352.157786 C97.1588787,340.423838 103.897856,329.766792 112.706129,320.958529 L112.706129,320.958529 L360.441401,73.2235621 C371.257143,62.4078333 385.433036,57 399.608914,57 Z" fill-rule="nonzero" stroke="currentColor" stroke-width="32"></path>        <polyline fill="currentColor" points="308.192388 138.192388 359.945436 138.192388 417.192388 138.192388 417.192388 170.192388 360.652543 170.192388 308.192388 170.192388" transform="translate(362.692388, 154.192388) rotate(45.000000) translate(-362.692388, -154.192388) "></polyline>    </g></svg>
+        Edited
+      </span></div><div class="advancedBody"><div class="tbody dropdownList-container"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Days to keep artifacts</div><div class="jenkins-form-description">if not empty, artifacts from builds older than this number of days will be deleted, but the logs, history, reports, etc for the build will be kept</div><div class="setting-main"><input step="1" min="1" name="_.artifactDaysToKeepStr" type="number" class="jenkins-input  positive-number" value=""></div><div class="validation-error-area" style="height: 0px;"><div></div></div></div><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Max # of builds to keep with artifacts</div><div class="jenkins-form-description">if not empty, only up to this number of builds have their artifacts retained</div><div class="setting-main"><input step="1" min="1" name="_.artifactNumToKeepStr" type="number" class="jenkins-input  positive-number" value=""></div><div class="validation-error-area" style="height: 0px;"><div></div></div></div><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Remove last build</div><div class="setting-main"><div class="jenkins-radio"><input name="_.removeLastBuild" id="670.0" type="radio" class="jenkins-radio__input" value="true"><label for="670.0" class="jenkins-radio__label">Yes</label><div class="jenkins-radio__children"></div></div><div class="jenkins-radio"><input name="_.removeLastBuild" checked="true" id="1600.0" type="radio" class="jenkins-radio__input" value="false"><label for="1600.0" class="jenkins-radio__label">No</label><div class="jenkins-radio__children"></div></div></div><div class="validation-error-area"></div></div></div></div></div><div style="" class="tr"><div><input name="stapler-class" type="hidden" value="hudson.tasks.LogRotator"><input name="$class" type="hidden" value="hudson.tasks.LogRotator"></div></div><div class="dropdownList-end rowvg-end tr"></div></div></div></div></div><div class="tr  rowvg-end optional-block-end row-group-end"></div></div><div class="row-set-end row-group-end tr jenkins-!-display-contents"></div><div name="org-jenkinsci-plugins-workflow-job-properties-DisableConcurrentBuildsJobProperty" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart15"></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight" nameref="rowSetStart15"><div class="help-sibling tr optional-block-start row-group-start " hashelp="false" ref="cb1"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="specified" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb1"><label class="attach-previous ">Do not allow concurrent builds</label></span></div></div><div class="rowvg-start tr form-container--hidden" style="display: none;"></div><div class="form-container tr form-container--hidden" style="display: none;"><div class="jenkins-form-item tr jenkins-form-item--tight"><div class="setting-main help-sibling" style="display: inline-flex; align-items: center;"><span class="jenkins-checkbox"><input name="_.abortPrevious" type="checkbox" class="  "><label class="attach-previous ">Abort previous builds</label></span><a helpurl="/descriptor/org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty/help/abortPrevious" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help" tabindex="9999"><span>?</span></a></div><div class="validation-error-area"></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div></div><div class="tr  rowvg-end optional-block-end row-group-end"></div></div><div class="row-set-end row-group-end tr jenkins-!-display-contents"></div><div name="org-jenkinsci-plugins-workflow-job-properties-DisableResumeJobProperty" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart16"></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight" nameref="rowSetStart16"><div class="help-sibling tr optional-block-start row-group-start " hashelp="false" ref="cb2"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="specified" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb2"><label class="attach-previous ">Do not allow the pipeline to resume if the controller restarts</label></span></div></div><div class="rowvg-start tr form-container--hidden" style="display: none;"></div><div class="form-container tr form-container--hidden" style="display: none;"></div><div class="tr  rowvg-end optional-block-end row-group-end"></div></div><div class="row-set-end row-group-end tr jenkins-!-display-contents"></div><div name="com-coravy-hudson-plugins-github-GithubProjectProperty" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart17"></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight" nameref="rowSetStart17"><div class="help-sibling tr optional-block-start row-group-start row-set-start" hashelp="false" ref="cb3"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="githubProject" checked="true" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb3"><label class="attach-previous ">GitHub project</label></span></div></div><div class="rowvg-start tr" nameref="cb3"></div><div class="form-container tr" nameref="cb3"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Project url<a helpurl="/descriptor/com.coravy.hudson.plugins.github.GithubProjectProperty/help/projectUrlStr" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Project url" tabindex="9999"><span>?</span></a></div><div class="setting-main">
+   
+
+  
+  <input name="_.projectUrlStr" placeholder="" type="text" class="jenkins-input   " value="https://github.com/TheodoreALSammour/videostore.git/"></div><div class="validation-error-area"></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div><div class="jenkins-form-item tr" nameref="cb3"><script src="./Videostore - 2 Config - Jenkins_files/advanced.js.download" type="text/javascript"></script><div class="advancedLink jenkins-buttons-row" nameref="cb3"><button type="button" class="jenkins-button advanced-button advancedButton">
+        Advanced
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><title></title><path d="M112 184l144 144 144-144" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"></path></svg></button><span tooltip="One or more fields in this block have been edited." id="id146" class="jenkins-edited-section-label jenkins-hidden" title="One or more fields in this block have been edited."><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" height="512px" version="1.1" viewBox="0 0 512 512" width="512px">    <title></title>    <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">        <path d="M399.608914,57 C413.784791,57 427.960684,62.4078333 438.776426,73.2235621 C449.592141,84.0392638 455,98.2149574 455,112.390686 C455,126.566468 449.592105,140.742274 438.776426,151.558078 L438.776426,151.558078 L191.040603,399.293596 C182.232434,408.101755 171.575528,414.840664 159.841736,419.022244 L159.841736,419.022244 L58.9309718,454.983885 C58.3980325,455.005817 57.9083807,454.793595 57.5574476,454.442654 C57.2063668,454.091565 56.9941379,453.601684 57.0161199,453.068522 L57.0161199,453.068522 L92.977296,352.157786 C97.1588787,340.423838 103.897856,329.766792 112.706129,320.958529 L112.706129,320.958529 L360.441401,73.2235621 C371.257143,62.4078333 385.433036,57 399.608914,57 Z" fill-rule="nonzero" stroke="currentColor" stroke-width="32"></path>        <polyline fill="currentColor" points="308.192388 138.192388 359.945436 138.192388 417.192388 138.192388 417.192388 170.192388 360.652543 170.192388 308.192388 170.192388" transform="translate(362.692388, 154.192388) rotate(45.000000) translate(-362.692388, -154.192388) "></polyline>    </g></svg>
+        Edited
+      </span></div><div class="advancedBody" nameref="cb3"><div class="tbody dropdownList-container"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Display name<a helpurl="/descriptor/com.coravy.hudson.plugins.github.GithubProjectProperty/help/displayName" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Display name" tabindex="9999"><span>?</span></a></div><div class="setting-main">
+   
+
+  
+  <input name="_.displayName" placeholder="" type="text" class="jenkins-input   " value=""></div><div class="validation-error-area"></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div></div></div></div></div><div class="tr row-set-end rowvg-end optional-block-end row-group-end"></div></div><div class="row-set-end row-group-end tr jenkins-!-display-contents"></div><div name="org-jenkinsci-plugins-workflow-job-properties-DurabilityHintJobProperty" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart18"></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight" nameref="rowSetStart18"><div class="help-sibling tr optional-block-start row-group-start " hashelp="true" ref="cb4"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="specified" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb4"><label class="attach-previous ">Pipeline speed/durability override</label></span><a helpurl="/descriptor/org.jenkinsci.plugins.workflow.job.properties.DurabilityHintJobProperty/help" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Pipeline speed/durability override" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr form-container--hidden" style="display: none;"></div><div class="form-container tr form-container--hidden" style="display: none;"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Custom Pipeline Speed/Durability Level</div><div class="setting-main"><div class="jenkins-select"><select class="jenkins-select__input" name="hint"><option tooltip="Avoids writing data with every step, avoids atomic writes of data.  Pipelines can resume if Jenkins shuts down cleanly, but running pipelines lose step information and cannot resume if Jenkins unexpectedly fails." value="PERFORMANCE_OPTIMIZED" title="Avoids writing data with every step, avoids atomic writes of data.  Pipelines can resume if Jenkins shuts down cleanly, but running pipelines lose step information and cannot resume if Jenkins unexpectedly fails.">Performance-optimized: much faster (requires clean shutdown to save running pipelines)</option><option tooltip="Writes data with every step but avoids atomic writes. On some file systems this is faster than maximum durability mode, but running pipeline data may be lost if disk writes are interrupted or fail." value="SURVIVABLE_NONATOMIC" title="Writes data with every step but avoids atomic writes. On some file systems this is faster than maximum durability mode, but running pipeline data may be lost if disk writes are interrupted or fail.">Less durability, a bit faster (specialty use only)</option><option tooltip="Writes data with every step, using atomic writes for integrity.  Provides maximum ability to retain running pipeline data and resume in the event of a Jenkins failure." value="MAX_SURVIVABILITY" selected="true" title="Writes data with every step, using atomic writes for integrity.  Provides maximum ability to retain running pipeline data and resume in the event of a Jenkins failure.">Maximum survivability/durability but slowest</option></select></div></div><div class="validation-error-area"></div></div></div><div class="tr  rowvg-end optional-block-end row-group-end"></div></div><div class="row-set-end row-group-end tr jenkins-!-display-contents"></div><div name="org-jenkinsci-plugins-pipeline-modeldefinition-properties-PreserveStashesJobProperty" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart19"></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight" nameref="rowSetStart19"><div class="help-sibling tr optional-block-start row-group-start " hashelp="true" ref="cb5"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="specified" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb5"><label class="attach-previous ">Preserve stashes from completed builds</label></span><a helpurl="/descriptor/org.jenkinsci.plugins.pipeline.modeldefinition.properties.PreserveStashesJobProperty/help" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Preserve stashes from completed builds" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr form-container--hidden" style="display: none;"></div><div class="form-container tr form-container--hidden" style="display: none;"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Keep this many of the most recent builds' stashes<a helpurl="/descriptor/org.jenkinsci.plugins.pipeline.modeldefinition.properties.PreserveStashesJobProperty/help/buildCount" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Keep this many of the most recent builds&#39; stashes" tabindex="9999"><span>?</span></a></div><div class="setting-main"><input checkdependson="" default="1" checkurl="/job/Videostore%20-%202/descriptorByName/org.jenkinsci.plugins.pipeline.modeldefinition.properties.PreserveStashesJobProperty/checkBuildCount" name="_.buildCount" type="number" class="jenkins-input validated " value="1"></div><div class="validation-error-area" style="height: 0px;"><div></div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div></div><div class="tr  rowvg-end optional-block-end row-group-end"></div></div><div class="row-set-end row-group-end tr jenkins-!-display-contents"></div><div name="hudson-model-ParametersDefinitionProperty" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart20"></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight" nameref="rowSetStart20"><div class="help-sibling tr optional-block-start row-group-start " hashelp="true" ref="cb6"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="specified" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb6"><label class="attach-previous ">This project is parameterized</label></span><a helpurl="/descriptor/hudson.model.ParametersDefinitionProperty/help" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: This project is parameterized" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr form-container--hidden" style="display: none;"></div><div class="form-container tr form-container--hidden" style="display: none;"><div class="tr"><div colspan="2"></div><div colspan="2"><div class="jenkins-form-item hetero-list-container with-drag-drop  "><div class="repeatable-insertion-point"></div><div><button type="button" suffix="parameterDefinitions" class="jenkins-button hetero-list-add" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><title></title><path d="M256 112v288M400 256H112" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>Add Parameter
+        </button></div></div></div></div></div><div class="tr  rowvg-end optional-block-end row-group-end"></div></div><div class="row-set-end row-group-end tr jenkins-!-display-contents"></div><div name="jenkins-branch-RateLimitBranchProperty$JobPropertyImpl" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart21"></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight" nameref="rowSetStart21"><div class="help-sibling tr optional-block-start row-group-start row-set-start" hashelp="true" ref="cb7"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="_.throttle" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb7"><label class="attach-previous ">Throttle builds</label></span><a helpurl="/descriptor/jenkins.branch.RateLimitBranchProperty$JobPropertyImpl/help/throttle" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Throttle builds" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr" nameref="cb7"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr form-container--hidden" nameref="cb7" style="display: none;"></div><div class="form-container tr form-container--hidden" nameref="cb7" style="display: none;"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Number of builds<a helpurl="/descriptor/jenkins.branch.RateLimitBranchProperty$JobPropertyImpl/help/count" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Number of builds" tabindex="9999"><span>?</span></a></div><div class="setting-main"><input checkdependson="durationName" default="1" min="1" max="1000" step="1" checkurl="/job/Videostore%20-%202/descriptorByName/jenkins.branch.RateLimitBranchProperty$JobPropertyImpl/checkCount" name="_.count" type="number" class="jenkins-input validated positive-number" value="1"></div><div class="validation-error-area validation-error-area--visible" style="height: auto;"><div class="ok">Approximately 60 minutes between builds</div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div><div class="jenkins-form-item tr " nameref="cb7"><div class="jenkins-form-label help-sibling">Time period<a helpurl="/descriptor/jenkins.branch.RateLimitBranchProperty$JobPropertyImpl/help/durationName" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Time period" tabindex="9999"><span>?</span></a></div><div class="setting-main" nameref="cb7"><script src="./Videostore - 2 Config - Jenkins_files/select.js.download" type="text/javascript"></script>
+
+   
+  <div data-readonly="false" class="jenkins-select"><select fillurl="/job/Videostore%20-%202/descriptorByName/jenkins.branch.RateLimitBranchProperty$JobPropertyImpl/fillDurationNameItems" name="_.durationName" class="jenkins-select__input select" value=""><option value="second">Second</option><option value="minute">Minute</option><option value="hour">Hour</option><option value="day">Day</option><option value="week">Week</option><option value="month">Month</option><option value="year">Year</option></select></div></div><div class="validation-error-area" nameref="cb7"></div><div class="help-area tr" nameref="cb7"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div><div class="jenkins-form-item tr jenkins-form-item--tight" nameref="cb7"><div class="setting-main help-sibling" style="display: inline-flex; align-items: center;"><span class="jenkins-checkbox"><input name="_.userBoost" type="checkbox" class="  "><label class="attach-previous ">Allow user triggered builds to skip the rate limit</label></span><a helpurl="/descriptor/jenkins.branch.RateLimitBranchProperty$JobPropertyImpl/help/userBoost" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help" tabindex="9999"><span>?</span></a></div><div class="validation-error-area" nameref="cb7"></div><div class="help-area tr" nameref="cb7"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div></div><div class="tr row-set-end rowvg-end optional-block-end row-group-end"></div></div><div class="row-set-end row-group-end tr jenkins-!-display-contents"></div><div name="org-jenkinsci-plugins-workflow-job-properties-PipelineTriggersJobProperty" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart23"></div><div name="triggers" style="display:none" class="row-set-start row-group-start tr" id="rowSetStart22" nameref="rowSetStart23"></div><section class="jenkins-section" nameref="rowSetStart22"><div class="jenkins-section__title" id="triggers"><div class="jenkins-hidden"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><path d="M112.91 128A191.85 191.85 0 0064 254c-1.18 106.35 85.65 193.8 192 194 106.2.2 192-85.83 192-192 0-104.54-83.55-189.61-187.5-192a4.36 4.36 0 00-4.5 4.37V152" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path><path d="M233.38 278.63l-79-113a8.13 8.13 0 0111.32-11.32l113 79a32.5 32.5 0 01-37.25 53.26 33.21 33.21 0 01-8.07-7.94z" fill="currentColor"></path></svg></div>
+          Triggers
+        </div><div class="jenkins-section__description">Set up automated actions that start your build based on specific events, like code changes or scheduled times.</div><div class="stapler-class-bag tr"><div><input type="hidden" name="stapler-class-bag" value="true"></div></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight"><div class="help-sibling tr optional-block-start row-group-start row-set-start" hashelp="true" ref="cb8"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="jenkins-triggers-ReverseBuildTrigger" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb8"><label class="attach-previous ">Build after other projects are built</label></span><a helpurl="/descriptor/jenkins.triggers.ReverseBuildTrigger/help" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Build after other projects are built" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr" nameref="cb8"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr form-container--hidden" nameref="cb8" style="display: none;"></div><div class="form-container tr form-container--hidden" nameref="cb8" style="display: none;"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Projects to watch</div><div class="setting-main">
+   
+
+  
+  <input checkdependson="" autocompleteurl="/job/Videostore%20-%202/descriptorByName/jenkins.triggers.ReverseBuildTrigger/autoCompleteUpstreamProjects" checkurl="/job/Videostore%20-%202/descriptorByName/jenkins.triggers.ReverseBuildTrigger/checkUpstreamProjects" autocompletedelimchar="," filldependson="value" name="_.upstreamProjects" placeholder="" type="text" class="jenkins-input validated auto-complete " value="" autocomplete="off" style="position: relative;"></div><div class="validation-error-area validation-error-area--visible" style="height: auto;"><div class="error">No project specified</div></div></div><div class="jenkins-radio" nameref="cb8"><input name="ReverseBuildTrigger.threshold" checked="true" id="2166.0" type="radio" class="jenkins-radio__input" value="SUCCESS"><label for="2166.0" class="jenkins-radio__label">Trigger only if build is stable</label><div class="jenkins-radio__children"></div></div><div class="jenkins-radio" nameref="cb8"><input name="ReverseBuildTrigger.threshold" id="1310.0" type="radio" class="jenkins-radio__input" value="UNSTABLE"><label for="1310.0" class="jenkins-radio__label">Trigger even if the build is unstable</label><div class="jenkins-radio__children"></div></div><div class="jenkins-radio" nameref="cb8"><input name="ReverseBuildTrigger.threshold" id="555.0" type="radio" class="jenkins-radio__input" value="FAILURE"><label for="555.0" class="jenkins-radio__label">Trigger even if the build fails</label><div class="jenkins-radio__children"></div></div><div class="jenkins-radio" nameref="cb8"><input name="ReverseBuildTrigger.threshold" id="600.0" type="radio" class="jenkins-radio__input" value="ABORTED"><label for="600.0" class="jenkins-radio__label">Always trigger, even if the build is aborted</label><div class="jenkins-radio__children"></div></div></div><div class="tr row-set-end rowvg-end optional-block-end row-group-end"></div></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight"><div class="help-sibling tr optional-block-start row-group-start row-set-start" hashelp="true" ref="cb9"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="hudson-triggers-TimerTrigger" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb9"><label class="attach-previous ">Build periodically</label></span><a helpurl="/descriptor/hudson.triggers.TimerTrigger/help" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Build periodically" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr" nameref="cb9"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr form-container--hidden" nameref="cb9" style="display: none;"></div><div class="form-container tr form-container--hidden" nameref="cb9" style="display: none;"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Schedule<a helpurl="/descriptor/hudson.triggers.TimerTrigger/help/spec" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Schedule" tabindex="9999"><span>?</span></a></div><div class="setting-main"><textarea checkdependson="" name="_.spec" rows="5" class="jenkins-input validated  " checkurl="/job/Videostore%20-%202/descriptorByName/hudson.triggers.TimerTrigger/checkSpec"></textarea></div><div class="validation-error-area validation-error-area--visible" style="height: auto;"><div class="warning">No schedules so will never run</div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div></div><div class="tr row-set-end rowvg-end optional-block-end row-group-end"></div></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight"><div class="help-sibling tr optional-block-start row-group-start row-set-start" hashelp="true" ref="cb10"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="com-cloudbees-jenkins-GitHubPushTrigger" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb10"><label class="attach-previous ">GitHub hook trigger for GITScm polling</label></span><a helpurl="/descriptor/com.cloudbees.jenkins.GitHubPushTrigger/help" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: GitHub hook trigger for GITScm polling" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr" nameref="cb10"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr form-container--hidden" nameref="cb10" style="display: none;"></div><div class="form-container tr form-container--hidden" nameref="cb10" style="display: none;"><div id="gh-hooks-warn" data-url="&#39;/job/Videostore%20-%202/&#39;+&#39;descriptorByName/com.cloudbees.jenkins.GitHubPushTrigger/checkHookRegistered&#39;" data-input="input[name=&#39;com-cloudbees-jenkins-GitHubPushTrigger&#39;]"></div><script src="./Videostore - 2 Config - Jenkins_files/warning.js.download" nameref="cb10"></script></div><div class="tr row-set-end rowvg-end optional-block-end row-group-end"></div></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight"><div class="help-sibling tr optional-block-start row-group-start row-set-start" hashelp="true" ref="cb11"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="hudson-triggers-SCMTrigger" checked="true" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb11"><label class="attach-previous ">Poll SCM</label></span><a helpurl="/descriptor/hudson.triggers.SCMTrigger/help" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Poll SCM" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr" nameref="cb11"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr" nameref="cb11"></div><div class="form-container tr" nameref="cb11"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Schedule<a helpurl="/descriptor/hudson.triggers.TimerTrigger/help/spec" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Schedule" tabindex="9999"><span>?</span></a></div><div class="setting-main"><textarea checkdependson="ignorePostCommitHooks" name="_.scmpoll_spec" rows="5" class="jenkins-input validated  " checkurl="/job/Videostore%20-%202/descriptorByName/hudson.triggers.SCMTrigger/checkScmpoll_spec">H/2 * * * *</textarea></div><div class="validation-error-area validation-error-area--visible" style="height: auto;"><div class="ok">Would last have run at Friday, October 17, 2025, 3:35:00 PM Eastern European Summer Time; would next run at Friday, October 17, 2025, 3:37:00 PM Eastern European Summer Time.</div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div><div class="jenkins-form-item tr jenkins-form-item--tight" nameref="cb11"><div class="setting-main help-sibling" style="display: inline-flex; align-items: center;"><span class="jenkins-checkbox"><input name="_.ignorePostCommitHooks" type="checkbox" class="  "><label class="attach-previous ">Ignore post-commit hooks</label></span><a helpurl="/descriptor/hudson.triggers.SCMTrigger/help/ignorePostCommitHooks" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help" tabindex="9999"><span>?</span></a></div><div class="validation-error-area" nameref="cb11"></div><div class="help-area tr" nameref="cb11"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div></div><div class="tr row-set-end rowvg-end optional-block-end row-group-end"></div></div></section><div class="row-set-end row-group-end tr jenkins-!-display-contents" nameref="rowSetStart23"></div><div class="row-set-end row-group-end tr jenkins-!-display-contents"></div></section><div class="row-set-end row-group-end tr jenkins-!-display-contents"></div><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight"><div class="help-sibling tr optional-block-start row-group-start row-set-start" hashelp="true" ref="cb12"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="pseudoRemoteTrigger" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb12"><label class="attach-previous ">Trigger builds remotely (e.g., from scripts)</label></span><a helpurl="/help/project-config/triggerRemotely.html" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Trigger builds remotely (e.g., from scripts)" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr" nameref="cb12"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr form-container--hidden" nameref="cb12" style="display: none;"></div><div class="form-container tr form-container--hidden" nameref="cb12" style="display: none;"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Authentication Token</div><div class="setting-main">
+   
+
+  
+  <input name="authToken" placeholder="" type="text" class="jenkins-input   " value="">
+        Use the following URL to trigger build remotely:
+        <code>JENKINS_URL</code>/job/Videostore%20-%202/build?token=<code>TOKEN_NAME</code>
+        or
+        /buildWithParameters?token=<code>TOKEN_NAME</code><br>
+        Optionally append <tt>&amp;cause=Cause+Text</tt> to provide text that will be included in the recorded build cause.
+      </div><div class="validation-error-area"></div></div></div><div class="tr row-set-end rowvg-end optional-block-end row-group-end"></div></div><section class="jenkins-section"><div class="jenkins-section__title" id="pipeline"><div class="jenkins-hidden"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" height="468px" version="1.1" viewBox="0 0 468 468" width="468px">    <g fill="none" fill-rule="evenodd" stroke="none" stroke-linecap="round" stroke-width="1">        <path d="M69,414 L69,284 C69,228.771525 113.771525,184 169,184 L273,184 C287.359403,184 299,172.359403 299,158 L299,54 L299,54 M399,54 L399,184 C399,239.228475 354.228475,284 299,284 L195,284 C180.640597,284 169,295.640597 169,310 L169,414 L169,414" stroke="currentColor" stroke-width="32"></path>    </g></svg></div>
+          Pipeline
+        </div><div class="jenkins-section__description">Define your Pipeline using Groovy directly or pull it from source control.</div><div class="jenkins-form-item"><div class="jenkins-form-label help-sibling">
+            Definition
+            </div><div class="jenkins-select"><select class="jenkins-select__input dropdownList"><option value="0" selected="true">Pipeline script</option><option value="1">Pipeline script from SCM</option></select></div></div><div class="dropdownList-container tr"><div><div width="100%" name="definition"><div class="dropdownList-start rowvg-start tr"></div><input name="oldScript" type="hidden" value="pipeline {
+ agent any
+ stages {
+ stage(&#39;Checkout&#39;) {
+ steps {
+ cleanWs()
+ git(
+ branch: &#39;main&#39;,
+ url: &quot;https://github.com/TheodoreALSammour/videostore.git/&quot;,
+ )
+ }
+ }
+ stage(&#39;Build Docker Image&#39;) {
+ steps {
+ bat &#39;docker build -t my-django-app:latest .&#39;
+ }
+ }
+ stage(&#39;Stop Old Container&#39;) {
+ steps {
+ bat &#39;docker stop my-django-app || exit 0&#39;
+ bat &#39;docker rm my-django-app || exit 0&#39;
+ }
+ }
+ stage(&#39;Run New Container&#39;) {
+ steps {
+ bat &#39;docker run -d --name my-django-app -p 8000:8000 my-django-app:latest&#39;
+ }
+ }
+ }
+}
+"><div class="jenkins-form-item tr"><div class="jenkins-form-label help-sibling">Script<a helpurl="/descriptor/org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition/help/script" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Script" tabindex="9999"><span>?</span></a></div><div class="setting-main"><div class="workflow-editor-wrapper" style="position: relative;"><textarea checkdependson="oldScript sandbox" name="_.script" checkmethod="post" rows="30" class="jenkins-input validated  " checkurl="/job/Videostore%20-%202/descriptorByName/org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition/checkScript" style="display: none;">pipeline {
+ agent any
+ stages {
+ stage('Checkout') {
+ steps {
+ cleanWs()
+ git(
+ branch: 'main',
+ url: "https://github.com/TheodoreALSammour/videostore.git/",
+ )
+ }
+ }
+ stage('Build Docker Image') {
+ steps {
+ bat 'docker build -t my-django-app:latest .'
+ }
+ }
+ stage('Stop Old Container') {
+ steps {
+ bat 'docker stop my-django-app || exit 0'
+ bat 'docker rm my-django-app || exit 0'
+ }
+ }
+ stage('Run New Container') {
+ steps {
+ bat 'docker run -d --name my-django-app -p 8000:8000 my-django-app:latest'
+ }
+ }
+ }
+}
+</textarea><div class="jquery-ui-1"><div samplesurl="/workflow-cps-samples/" style="height: 350px;" class="editor ace_editor ace-tm ui-resizable" id="workflow-editor-1"><div style="position: absolute;"></div><textarea class="ace_text-input" wrap="off" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-haspopup="false" aria-autocomplete="both" role="textbox" aria-label="Cursor at row 31" style="opacity: 0; font-size: 1px; top: 0px; left: 0px;"></textarea><div class="ace_gutter" aria-hidden="true" style="left: 0px; width: 49px;"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="height: 1e+06px; top: 0px; left: 0px; width: 49px;"><div class="ace_gutter-cell " aria-hidden="false" style="height: 23px; top: 0px;">1<span class="ace_fold-widget ace_start ace_open" role="button" tabindex="-1" aria-label="Toggle code folding, rows 1 through 30" aria-expanded="true" title="Fold code" style="height: 23px; display: inline-block;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="true" style="height: 23px; top: 23px;">2<span tabindex="0" style="display: none;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="false" style="height: 23px; top: 46px;">3<span class="ace_fold-widget ace_start ace_open" role="button" tabindex="-1" aria-label="Toggle code folding, rows 3 through 29" aria-expanded="true" title="Fold code" style="height: 23px; display: inline-block;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="false" style="height: 23px; top: 69px;">4<span class="ace_fold-widget ace_start ace_open" role="button" tabindex="-1" aria-label="Toggle code folding, rows 4 through 12" aria-expanded="true" title="Fold code" style="height: 23px; display: inline-block;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="false" style="height: 23px; top: 92px;">5<span class="ace_fold-widget ace_start ace_open" role="button" tabindex="-1" aria-label="Toggle code folding, rows 5 through 11" aria-expanded="true" title="Fold code" style="height: 23px; display: inline-block;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="true" style="height: 23px; top: 115px;">6<span tabindex="0" style="display: none;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="false" style="height: 23px; top: 138px;">7<span class="ace_fold-widget ace_start ace_open" role="button" tabindex="-1" aria-label="Toggle code folding, rows 7 through 10" aria-expanded="true" title="Fold code" style="height: 23px; display: inline-block;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="true" style="height: 23px; top: 161px;">8<span tabindex="0" style="display: none;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="true" style="height: 23px; top: 184px;">9<span tabindex="0" style="display: none;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="true" style="height: 23px; top: 207px;">10<span tabindex="0" style="display: none;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="true" style="height: 23px; top: 230px;">11<span tabindex="0" style="display: none;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="true" style="height: 23px; top: 253px;">12<span tabindex="0" style="display: none;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="false" style="height: 23px; top: 276px;">13<span class="ace_fold-widget ace_start ace_open" role="button" tabindex="-1" aria-label="Toggle code folding, rows 13 through 17" aria-expanded="true" title="Fold code" style="height: 23px; display: inline-block;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="false" style="height: 23px; top: 299px;">14<span class="ace_fold-widget ace_start ace_open" role="button" tabindex="-1" aria-label="Toggle code folding, rows 14 through 16" aria-expanded="true" title="Fold code" style="height: 23px; display: inline-block;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="true" style="height: 23px; top: 322px;">15<span tabindex="0" style="display: none;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="true" style="height: 23px; top: 345px;">16<span tabindex="0" style="display: none;"></span><span tabindex="0" style="display: none;"><span></span></span></div><div class="ace_gutter-cell " aria-hidden="true" style="height: 23px; top: 368px;">17<span tabindex="0" style="display: none;"></span><span tabindex="0" style="display: none;"><span></span></span></div></div></div><div class="ace_scroller " style="line-height: 23px; left: 48.3945px; right: 17px; bottom: 0px;"><div class="ace_content" style="top: 0px; left: 0px; width: 1286.61px; height: 394px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 620px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_text-layer" style="height: 1e+06px; margin: 0px 4px; top: 0px; left: 0px;"><div class="ace_line" style="height: 23px; top: 0px;"><span class="ace_identifier">pipeline</span> {</div><div class="ace_line" style="height: 23px; top: 23px;"> <span class="ace_identifier">agent</span> <span class="ace_identifier">any</span></div><div class="ace_line" style="height: 23px; top: 46px;"> <span class="ace_identifier">stages</span> {</div><div class="ace_line" style="height: 23px; top: 69px;"> <span class="ace_identifier">stage</span>(<span class="ace_string">'Checkout'</span>) {</div><div class="ace_line" style="height: 23px; top: 92px;"> <span class="ace_identifier">steps</span> {</div><div class="ace_line" style="height: 23px; top: 115px;"> <span class="ace_identifier">cleanWs</span>()</div><div class="ace_line" style="height: 23px; top: 138px;"> <span class="ace_identifier">git</span>(</div><div class="ace_line" style="height: 23px; top: 161px;"> <span class="ace_identifier">branch</span>: <span class="ace_string">'main'</span>,</div><div class="ace_line" style="height: 23px; top: 184px;"> <span class="ace_identifier">url</span>: <span class="ace_string">"https://github.com/TheodoreALSammour/videostore.git/"</span>,</div><div class="ace_line" style="height: 23px; top: 207px;"> )</div><div class="ace_line" style="height: 23px; top: 230px;"> }</div><div class="ace_line" style="height: 23px; top: 253px;"> }</div><div class="ace_line" style="height: 23px; top: 276px;"> <span class="ace_identifier">stage</span>(<span class="ace_string">'Build Docker Image'</span>) {</div><div class="ace_line" style="height: 23px; top: 299px;"> <span class="ace_identifier">steps</span> {</div><div class="ace_line" style="height: 23px; top: 322px;"> <span class="ace_identifier">bat</span> <span class="ace_string">'docker build -t my-django-app:latest .'</span></div><div class="ace_line" style="height: 23px; top: 345px;"> }</div><div class="ace_line" style="height: 23px; top: 368px;"> }</div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor" style="display: block; top: 690px; left: 4px; width: 8px; height: 23px;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="width: 22px; height: 348px; bottom: 0px;"><div class="ace_scrollbar-inner" style="width: 22px; height: 713px;">&nbsp;</div></div><div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 22px; left: 48.3945px; right: 17px; width: 1286.61px;"><div class="ace_scrollbar-inner" style="height: 22px; width: 1286.61px;">&nbsp;</div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;">הההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההה</div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div><div class="ace_tooltip" role="tooltip" id="gt1" style="display: none; pointer-events: auto;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div></div></div></div><script src="./Videostore - 2 Config - Jenkins_files/workflow-editor.js.download" type="text/javascript"></script></div><div class="validation-error-area" style="height: 0px;"><div></div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div><div class="jenkins-form-item tr jenkins-form-item--tight"><div class="setting-main help-sibling" style="display: inline-flex; align-items: center;"><span class="jenkins-checkbox"><input name="_.sandbox" checked="true" type="checkbox" class="  "><label class="attach-previous ">Use Groovy Sandbox</label></span><a helpurl="/descriptor/org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition/help/sandbox" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help" tabindex="9999"><span>?</span></a></div><div class="validation-error-area"></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div><div class="tr jenkins-!-margin-bottom-2"><div colspan="4"><a href="http://localhost:8080/job/Videostore%20-%202/pipeline-syntax" target="_blank">Pipeline Syntax</a></div></div><div style="" class="tr"><div><input name="stapler-class" type="hidden" value="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition"><input name="$class" type="hidden" value="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition"></div></div><div class="dropdownList-end rowvg-end tr"></div><div class="dropdownList-start rowvg-start tr form-container--hidden" field-disabled="true" style="display: none;"></div><div class="render-on-demand form-container--hidden" data-proxy-method="makeStaplerProxy" data-proxy-url="/$stapler/bound/cea5e30b-8d2e-4510-bd91-39e5266655c2" data-proxy-crumb="30113f55565f385cc6cc00fbf59ddda329c027927b88d790199bbd91bc5a6e31" data-proxy-url-names="render" field-disabled="true" style="display: none;"></div><div style="display:none" class="tr form-container--hidden" field-disabled="true"><div><input name="stapler-class" type="hidden" value="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition"><input name="$class" type="hidden" value="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition"></div></div><div class="dropdownList-end rowvg-end tr"></div></div></div></div></section><section class="jenkins-section"><div class="jenkins-section__title" id="advanced"><div class="jenkins-hidden"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><title></title><path d="M393.87 190a32.1 32.1 0 01-45.25 0l-26.57-26.57a32.09 32.09 0 010-45.26L382.19 58a1 1 0 00-.3-1.64c-38.82-16.64-89.15-8.16-121.11 23.57-30.58 30.35-32.32 76-21.12 115.84a31.93 31.93 0 01-9.06 32.08L64 380a48.17 48.17 0 1068 68l153.86-167a31.93 31.93 0 0131.6-9.13c39.54 10.59 84.54 8.6 114.72-21.19 32.49-32 39.5-88.56 23.75-120.93a1 1 0 00-1.6-.26z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"></path><circle cx="96" cy="416" fill="currentColor" r="16"></circle></svg></div>
+          Advanced
+        </div><div class="jenkins-form-item tr jenkins-form-item--tight"><div class="advancedLink jenkins-buttons-row"><button type="button" class="jenkins-button advanced-button advancedButton">
+        Advanced
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 512 512"><title></title><path d="M112 184l144 144 144-144" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48"></path></svg></button><span tooltip="One or more fields in this block have been edited." id="id147" class="jenkins-edited-section-label jenkins-hidden" title="One or more fields in this block have been edited."><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" height="512px" version="1.1" viewBox="0 0 512 512" width="512px">    <title></title>    <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">        <path d="M399.608914,57 C413.784791,57 427.960684,62.4078333 438.776426,73.2235621 C449.592141,84.0392638 455,98.2149574 455,112.390686 C455,126.566468 449.592105,140.742274 438.776426,151.558078 L438.776426,151.558078 L191.040603,399.293596 C182.232434,408.101755 171.575528,414.840664 159.841736,419.022244 L159.841736,419.022244 L58.9309718,454.983885 C58.3980325,455.005817 57.9083807,454.793595 57.5574476,454.442654 C57.2063668,454.091565 56.9941379,453.601684 57.0161199,453.068522 L57.0161199,453.068522 L92.977296,352.157786 C97.1588787,340.423838 103.897856,329.766792 112.706129,320.958529 L112.706129,320.958529 L360.441401,73.2235621 C371.257143,62.4078333 385.433036,57 399.608914,57 Z" fill-rule="nonzero" stroke="currentColor" stroke-width="32"></path>        <polyline fill="currentColor" points="308.192388 138.192388 359.945436 138.192388 417.192388 138.192388 417.192388 170.192388 360.652543 170.192388 308.192388 170.192388" transform="translate(362.692388, 154.192388) rotate(45.000000) translate(-362.692388, -154.192388) "></polyline>    </g></svg>
+        Edited
+      </span></div><div class="advancedBody"><div class="tbody dropdownList-container"><div class="optionalBlock-container jenkins-form-item jenkins-form-item--tight"><div class="help-sibling tr optional-block-start row-group-start " hashelp="true" ref="cb13"><div class="jenkins-checkbox-help-wrapper"><span class="jenkins-checkbox"><input name="hasCustomQuietPeriod" type="checkbox" class="optional-block-control block-control optional-block-event-item  " id="cb13"><label class="attach-previous ">Quiet period</label></span><a helpurl="/descriptor/jenkins.model.GlobalQuietPeriodConfiguration/help/quietPeriod" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Quiet period" tabindex="9999"><span>?</span></a></div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div><div class="rowvg-start tr form-container--hidden" style="display: none;"></div><div class="form-container tr form-container--hidden" style="display: none;"><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Quiet period</div><div class="jenkins-form-description">Number of seconds</div><div class="setting-main"><input step="1" min="0" name="quiet_period" type="number" class="jenkins-input  number" value="5"></div><div class="validation-error-area" style="height: 0px;"><div></div></div></div></div><div class="tr  rowvg-end optional-block-end row-group-end"></div></div><div class="jenkins-form-item tr "><div class="jenkins-form-label help-sibling">Display Name<a helpurl="/descriptor/org.jenkinsci.plugins.workflow.job.WorkflowJob/help/displayNameOrNull" href="http://localhost:8080/job/Videostore%20-%202/configure#" class="jenkins-help-button" aria-label="Help for feature: Display Name" tabindex="9999"><span>?</span></a></div><div class="setting-main">
+   
+
+  
+  <input checkdependson="" checkurl="/job/Videostore%20-%202/descriptorByName/org.jenkinsci.plugins.workflow.job.WorkflowJob/checkDisplayNameOrNull" name="_.displayNameOrNull" placeholder="" type="text" class="jenkins-input validated  " value=""></div><div class="validation-error-area" style="height: 0px;"><div></div></div><div class="help-area tr"><div class="help"><p class="jenkins-spinner">Loading...</p></div></div></div></div></div></div></section><div class="jenkins-bottom-app-bar__shadow jenkins-bottom-app-bar__shadow--stuck"></div><div id="bottom-sticker"><div class="bottom-sticker-inner jenkins-buttons-row jenkins-buttons-row--equal-width"><button formnovalidate="formNoValidate" name="Submit" value="Save" class="jenkins-button jenkins-submit-button jenkins-button--primary ">
+    Save
+  </button><script src="./Videostore - 2 Config - Jenkins_files/apply.js.download" type="text/javascript"></script><input type="hidden" name="core:apply" value=""><button type="button" class="jenkins-button apply-button" name="Apply">Apply</button></div></div><script src="./Videostore - 2 Config - Jenkins_files/confirm.js.download" type="text/javascript"></script></div><div class="jenkins-!-display-contents"><input type="hidden" name="Jenkins-Crumb" value="30113f55565f385cc6cc00fbf59ddda329c027927b88d790199bbd91bc5a6e31"></div><div class="jenkins-!-display-contents"><input type="hidden" name="json" value="init"></div></form><!--
+⇐ end of main content
+--></div></div><footer class="page-footer jenkins-mobile-hide"><div class="page-footer__flex-row"><div class="page-footer__footer-id-placeholder" id="footer"></div><div class="page-footer__links"><a class="jenkins-button jenkins-button--tertiary rest-api" href="http://localhost:8080/job/Videostore%20-%202/api/">REST API</a><button type="button" class="jenkins-button jenkins-button--tertiary jenkins_ver" data-dropdown="true" aria-expanded="false">Jenkins 2.528.1</button><template></template></div></div></footer></body></html>
