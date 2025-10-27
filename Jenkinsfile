@@ -2,17 +2,15 @@ pipeline {
   agent any
 
   triggers {
-    // Poll GitHub every 2 minutes
     pollSCM('H/2 * * * *')
   }
 
-  // Make sure kubectl does NOT go through any proxy
   environment {
+    // Nuke any proxy for kubectl/minikube within this build
     HTTP_PROXY = ''
     HTTPS_PROXY = ''
     http_proxy = ''
     https_proxy = ''
-    // Bypass proxy for local/cluster addresses
     NO_PROXY   = '127.0.0.1,localhost,::1,.svc,cluster.local,10.0.0.0/8,192.168.0.0/16,172.16.0.0/12'
   }
 
@@ -23,11 +21,21 @@ pipeline {
       }
     }
 
-    stage('Prepare K8s Context') {
+    stage('Ensure Minikube up (for this Jenkins user)') {
       steps {
         bat '''
-        REM Ensure Jenkins is talking to the Minikube context
+        echo ==== Minikube status (expect failure on first run) ====
+        minikube status || echo NO-CLUSTER
+
+        echo ==== Start minikube if needed ====
+        REM IMPORTANT: Docker Desktop must be running for this account
+        IF ERRORLEVEL 1 (
+          minikube start --driver=docker --kubernetes-version=v1.29.6 --alsologtostderr -v=1
+        )
+
+        echo ==== Point kubectl to minikube context ====
         minikube -p minikube update-context
+
         kubectl config current-context
         kubectl get nodes
         '''
@@ -37,14 +45,13 @@ pipeline {
     stage('Build in Minikube Docker') {
       steps {
         bat '''
-        REM === Switch Docker to Minikube Docker (CMD script) ===
+        REM Switch Docker client to Minikube’s Docker
         minikube -p minikube docker-env --shell=cmd > docker_env.bat
         call docker_env.bat
 
-        REM Sanity check we are pointing at the Minikube Docker daemon
         docker info
 
-        REM === Build Django image inside Minikube's Docker ===
+        REM Build the Django image inside Minikube’s Docker
         docker build -t mydjangoapp:latest .
         '''
       }
@@ -53,11 +60,10 @@ pipeline {
     stage('Deploy to Minikube') {
       steps {
         bat '''
-        REM Use Minikube's kubectl to avoid kubeconfig/proxy issues
+        REM Use Minikube’s kubectl to avoid kubeconfig/proxy issues
         minikube kubectl -- apply -f deployment.yaml --validate=false
         minikube kubectl -- apply -f service.yaml --validate=false
 
-        REM Wait for rollout and then show services
         minikube kubectl -- rollout status deployment/django-deployment --timeout=180s
         minikube kubectl -- get pods -o wide
         minikube kubectl -- get svc
@@ -68,7 +74,10 @@ pipeline {
 
   post {
     always {
-      bat 'minikube logs --file=minikube-logs.txt'
+      bat '''
+      echo ==== Collecting minikube logs (best-effort) ====
+      minikube logs --file=minikube-logs.txt || echo SKIP LOGS
+      '''
       archiveArtifacts artifacts: 'minikube-logs.txt', allowEmptyArchive: true
     }
   }
