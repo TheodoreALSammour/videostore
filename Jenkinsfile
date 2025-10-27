@@ -7,12 +7,13 @@ pipeline {
   }
 
   environment {
-    // Ensure kubectl/minikube are NOT proxied inside builds
+    // Avoid proxying kubectl/minikube
     HTTP_PROXY = ''
     HTTPS_PROXY = ''
     http_proxy = ''
     https_proxy = ''
     NO_PROXY   = '127.0.0.1,localhost,::1,.svc,cluster.local,10.0.0.0/8,192.168.0.0/16,172.16.0.0/12'
+    K8S_VERSION = 'v1.34.0'  // match your existing cluster
   }
 
   stages {
@@ -22,71 +23,85 @@ pipeline {
       }
     }
 
-    stage('Ensure Minikube up (K8s v1.34.0)') {
+    stage('Ensure clusters up (minikube + mini2)') {
       steps {
         bat '''
-        echo ===== Checking minikube status =====
-        minikube status >NUL 2>&1
+        echo ===== Ensure profile: minikube =====
+        minikube -p minikube status >NUL 2>&1
         IF ERRORLEVEL 1 (
-          echo ===== Starting minikube (v1.34.0) =====
-          minikube start --driver=docker --kubernetes-version=v1.34.0 --alsologtostderr -v=1
+          minikube start -p minikube --driver=docker --kubernetes-version=%K8S_VERSION% --alsologtostderr -v=1
         ) ELSE (
-          for /f "tokens=2 delims=:" %%v in ('minikube status ^| findstr /I "host:"') do set STATE=%%v
-          set STATE=%STATE: =%
-          echo Current state: %STATE%
-          IF /I "%STATE%"=="Stopped" (
-            echo ===== Starting stopped cluster (v1.34.0) =====
-            minikube start --driver=docker --kubernetes-version=v1.34.0 --alsologtostderr -v=1
+          for /f "tokens=2 delims=:" %%v in ('minikube -p minikube status ^| findstr /I "host:"') do set S=%%v
+          set S=%S: =%
+          IF /I "%S%"=="Stopped" (
+            minikube start -p minikube --driver=docker --kubernetes-version=%K8S_VERSION% --alsologtostderr -v=1
           )
         )
-
-        echo ===== Point kubectl to minikube context =====
         minikube -p minikube update-context
 
-        echo Current context:
-        kubectl config current-context
+        echo ===== Ensure profile: mini2 =====
+        minikube -p mini2 status >NUL 2>&1
+        IF ERRORLEVEL 1 (
+          minikube start -p mini2 --driver=docker --kubernetes-version=%K8S_VERSION% --alsologtostderr -v=1
+        ) ELSE (
+          for /f "tokens=2 delims=:" %%v in ('minikube -p mini2 status ^| findstr /I "host:"') do set S2=%%v
+          set S2=%S2: =%
+          IF /I "%S2%"=="Stopped" (
+            minikube start -p mini2 --driver=docker --kubernetes-version=%K8S_VERSION% --alsologtostderr -v=1
+          )
+        )
+        minikube -p mini2 update-context
 
-        echo Nodes:
+        echo -- minikube nodes --
+        kubectl config use-context minikube
+        kubectl get nodes -o wide
+
+        echo -- mini2 nodes --
+        kubectl config use-context mini2
         kubectl get nodes -o wide
         '''
       }
     }
 
-    stage('Build images inside Minikube') {
+    stage('Build images into each profile') {
       steps {
         bat '''
-        echo ===== Building v1 image (mydjangoapp:latest) =====
-        rem Build directly into Minikube’s image store
-        minikube image build -t mydjangoapp:latest .
-
-        echo ===== Building v2 image (mydjangoapp:v2) =====
-        minikube image build -t mydjangoapp:v2 .
+        echo ===== Build (profile: minikube) =====
+        minikube -p minikube image build -t mydjangoapp:latest .
+        echo ===== Build (profile: mini2) =====
+        minikube -p mini2 image build -t mydjangoapp:v2 .
         '''
       }
     }
 
-    stage('Deploy v1 & v2 to Minikube') {
+    stage('Deploy v1 to minikube') {
       steps {
         bat '''
-        echo ===== Apply v1 manifests =====
-        minikube kubectl -- apply -f deployment.yaml --validate=false
-        minikube kubectl -- apply -f service.yaml --validate=false
+        minikube -p minikube kubectl -- apply -f deployment.yaml --validate=false
+        minikube -p minikube kubectl -- apply -f service.yaml --validate=false
 
-        echo ===== Apply v2 manifests =====
-        minikube kubectl -- apply -f deployment-v2.yaml --validate=false
-        minikube kubectl -- apply -f service-v2.yaml --validate=false
+        minikube -p minikube kubectl -- rollout status deployment/django-deployment --timeout=180s
+        minikube -p minikube kubectl -- get deploy,svc,pods -o wide
 
-        echo ===== Wait for rollouts =====
-        minikube kubectl -- rollout status deployment/django-deployment --timeout=180s
-        minikube kubectl -- rollout status deployment/django-deployment-v2 --timeout=180s
+        for /f %%i in ('minikube -p minikube ip') do set IP1=%%i
+        echo MINIKUBE_IP=%IP1%
+        echo V1 URL: http://%IP1%:30080
+        '''
+      }
+    }
 
-        echo ===== Show resources =====
-        minikube kubectl -- get deploy,svc,pods -o wide
+    stage('Deploy v2 to mini2') {
+      steps {
+        bat '''
+        minikube -p mini2 kubectl -- apply -f deployment-v2.yaml --validate=false
+        minikube -p mini2 kubectl -- apply -f service-v2.yaml --validate=false
 
-        echo ===== Print access URLs =====
-        for /f %%i in ('minikube ip') do set MINIIP=%%i
-        echo V1 URL:  http://%MINIIP%:30080
-        echo V2 URL:  http://%MINIIP%:30081
+        minikube -p mini2 kubectl -- rollout status deployment/django-deployment-v2 --timeout=180s
+        minikube -p mini2 kubectl -- get deploy,svc,pods -o wide
+
+        for /f %%i in ('minikube -p mini2 ip') do set IP2=%%i
+        echo MINI2_IP=%IP2%
+        echo V2 URL: http://%IP2%:30080
         '''
       }
     }
@@ -95,10 +110,10 @@ pipeline {
   post {
     always {
       bat '''
-      echo ===== Collecting minikube logs (best effort) =====
-      minikube logs --file=minikube-logs.txt || echo SKIP LOGS
+      minikube -p minikube logs --file=minikube-logs-1.txt  || echo SKIP LOGS 1
+      minikube -p mini2    logs --file=minikube-logs-2.txt  || echo SKIP LOGS 2
       '''
-      archiveArtifacts artifacts: 'minikube-logs.txt', allowEmptyArchive: true
+      archiveArtifacts artifacts: 'minikube-logs-*.txt', allowEmptyArchive: true
     }
   }
 }
