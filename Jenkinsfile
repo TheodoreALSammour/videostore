@@ -22,14 +22,22 @@ pipeline {
       }
     }
 
-    stage('Ensure Minikube up (for this Jenkins user)') {
+    stage('Ensure Minikube up (K8s v1.34.0)') {
       steps {
         bat '''
         echo ===== Checking minikube status =====
         minikube status >NUL 2>&1
         IF ERRORLEVEL 1 (
-          echo ===== Starting minikube =====
-          minikube start --driver=docker --kubernetes-version=v1.29.6 --alsologtostderr -v=1
+          echo ===== Starting minikube (v1.34.0) =====
+          minikube start --driver=docker --kubernetes-version=v1.34.0 --alsologtostderr -v=1
+        ) ELSE (
+          for /f "tokens=2 delims=:" %%v in ('minikube status ^| findstr /I "host:"') do set STATE=%%v
+          set STATE=%STATE: =%
+          echo Current state: %STATE%
+          IF /I "%STATE%"=="Stopped" (
+            echo ===== Starting stopped cluster (v1.34.0) =====
+            minikube start --driver=docker --kubernetes-version=v1.34.0 --alsologtostderr -v=1
+          )
         )
 
         echo ===== Point kubectl to minikube context =====
@@ -48,7 +56,7 @@ pipeline {
       steps {
         bat '''
         echo ===== Building v1 image (mydjangoapp:latest) =====
-        rem Build directly into Minikube’s image registry
+        rem Build directly into Minikube’s image store
         minikube image build -t mydjangoapp:latest .
 
         echo ===== Building v2 image (mydjangoapp:v2) =====
