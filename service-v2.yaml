@@ -1,13 +1,11 @@
+# service-v2.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: django-service-v2
 spec:
-  type: NodePort
   selector:
     app: django-app-v2
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8000
-      nodePort: 30081
+    - port: 8001          # different cluster-internal port
+      targetPort: 8001
