@@ -1,119 +1,105 @@
 pipeline {
   agent any
 
-  triggers {
-    // Poll GitHub every 2 minutes
-    pollSCM('H/2 * * * *')
+  /* ======== Parameters (editable in Jenkins UI) ======== */
+  parameters {
+    string(name: 'GIT_URL',    defaultValue: 'https://github.com/TheodoreALSammour/videostore.git', description: 'Repository URL')
+    string(name: 'GIT_BRANCH', defaultValue: 'main', description: 'Branch to build')
+
+    string(name: 'DJANGO_PORT', defaultValue: '8001', description: 'Port for Django dev server')
+
+    booleanParam(name: 'ADD_ALIAS', defaultValue: true, description: 'Add a secondary IP alias before starting server')
+    string(name: 'IFACE_NAME',  defaultValue: 'Wi-Fi', description: 'Interface name (from "netsh interface ipv4 show interfaces")')
+    string(name: 'SECOND_IP',   defaultValue: '10.10.10.10', description: 'Secondary local IP to add')
+    string(name: 'SUBNET_MASK', defaultValue: '255.255.255.0', description: 'Subnet mask for the secondary IP')
   }
 
   environment {
-    // Avoid proxying kubectl/minikube
-    HTTP_PROXY = ''
-    HTTPS_PROXY = ''
-    http_proxy = ''
-    https_proxy = ''
-    NO_PROXY   = '127.0.0.1,localhost,::1,.svc,cluster.local,10.0.0.0/8,192.168.0.0/16,172.16.0.0/12'
-    K8S_VERSION = 'v1.34.0'  // match your existing cluster
+    // Use the job workspace dynamically (no hard-coded paths)
+    WORKDIR = "${env.WORKSPACE}"
+    VENV_PY = "${env.WORKSPACE}\\.venv\\Scripts\\python.exe"
   }
 
   stages {
+
     stage('Checkout') {
       steps {
-        git branch: 'main', url: 'https://github.com/TheodoreALSammour/videostore.git'
+        // Clones into ${WORKSPACE}
+        git branch: "${params.GIT_BRANCH}", url: "${params.GIT_URL}"
       }
     }
 
-    stage('Ensure clusters up (minikube + mini2)') {
+    stage('Python Env & Migrate') {
       steps {
-        bat '''
-        echo ===== Ensure profile: minikube =====
-        minikube -p minikube status >NUL 2>&1
-        IF ERRORLEVEL 1 (
-          minikube start -p minikube --driver=docker --kubernetes-version=%K8S_VERSION% --alsologtostderr -v=1
-        ) ELSE (
-          for /f "tokens=2 delims=:" %%v in ('minikube -p minikube status ^| findstr /I "host:"') do set S=%%v
-          set S=%S: =%
-          IF /I "%S%"=="Stopped" (
-            minikube start -p minikube --driver=docker --kubernetes-version=%K8S_VERSION% --alsologtostderr -v=1
-          )
-        )
-        minikube -p minikube update-context
+        bat """
+          cd "%WORKDIR%"
+          py -3 -m venv .venv
+          .venv\\Scripts\\python -m pip install --upgrade pip
+          .venv\\Scripts\\pip install -r requirements.txt
+          .venv\\Scripts\\python manage.py migrate
+        """
+      }
+    }
 
-        echo ===== Ensure profile: mini2 =====
-        minikube -p mini2 status >NUL 2>&1
-        IF ERRORLEVEL 1 (
-          minikube start -p mini2 --driver=docker --kubernetes-version=%K8S_VERSION% --alsologtostderr -v=1
-        ) ELSE (
-          for /f "tokens=2 delims=:" %%v in ('minikube -p mini2 status ^| findstr /I "host:"') do set S2=%%v
-          set S2=%S2: =%
-          IF /I "%S2%"=="Stopped" (
-            minikube start -p mini2 --driver=docker --kubernetes-version=%K8S_VERSION% --alsologtostderr -v=1
-          )
-        )
-        minikube -p mini2 update-context
+    stage('Allow Firewall (first time only)') {
+      steps {
+        bat """
+          netsh advfirewall firewall show rule name="Videostore-%DJANGO_PORT%" >NUL 2>&1
+          if errorlevel 1 netsh advfirewall firewall add rule name="Videostore-%DJANGO_PORT%" dir=in action=allow protocol=TCP localport=%DJANGO_PORT%
+        """
+      }
+    }
 
-        echo -- minikube nodes --
-        kubectl config use-context minikube
-        kubectl get nodes -o wide
+    stage('Add Secondary IP (optional)') {
+      when { expression { return params.ADD_ALIAS } }
+      steps {
+        bat """
+          netsh interface ipv4 show interfaces
+          netsh interface ipv4 add address name="${params.IFACE_NAME}" address=${params.SECOND_IP} mask=${params.SUBNET_MASK} skipassource=true
+        """
+      }
+    }
 
-        echo -- mini2 nodes --
-        kubectl config use-context mini2
-        kubectl get nodes -o wide
+    stage('Free Port if Busy') {
+      steps {
+        powershell '''
+          $port = "${env.DJANGO_PORT}"
+          $conn = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
+          if ($conn) {
+            $pid = $conn.OwningProcess
+            Write-Host "Killing process on port $port (PID=$pid)"
+            Stop-Process -Id $pid -Force
+            Start-Sleep -Seconds 2
+          } else {
+            Write-Host "Port $port is free."
+          }
         '''
       }
     }
 
-    stage('Build images into each profile') {
+    stage('Start Django (Detached)') {
       steps {
-        bat '''
-        echo ===== Build (profile: minikube) =====
-        minikube -p minikube image build -t mydjangoapp:latest .
-        echo ===== Build (profile: mini2) =====
-        minikube -p mini2 image build -t mydjangoapp:v2 .
+        powershell '''
+          $proj = "${env.WORKDIR}"
+          $py   = "${env.VENV_PY}"
+          $args = @("manage.py","runserver","0.0.0.0:${env.DJANGO_PORT}")
+          Write-Host "Starting Videostore on 0.0.0.0:${env.DJANGO_PORT} ..."
+          Start-Process -FilePath $py -ArgumentList $args -WorkingDirectory $proj -WindowStyle Hidden
         '''
       }
     }
 
-    stage('Deploy v1 to minikube') {
+    stage('Show Addresses') {
       steps {
-        bat '''
-        minikube -p minikube kubectl -- apply -f deployment.yaml --validate=false
-        minikube -p minikube kubectl -- apply -f service.yaml --validate=false
-
-        minikube -p minikube kubectl -- rollout status deployment/django-deployment --timeout=180s
-        minikube -p minikube kubectl -- get deploy,svc,pods -o wide
-
-        for /f %%i in ('minikube -p minikube ip') do set IP1=%%i
-        echo MINIKUBE_IP=%IP1%
-        echo V1 URL: http://%IP1%:30080
-        '''
+        bat """
+          echo ===== Active IPv4 addresses =====
+          for /f "tokens=2 delims=:" %%A in ('ipconfig ^| findstr /R /C:"IPv4 Address"') do @echo %%A
+          echo.
+          echo Open these in your browser:
+          echo   http://127.0.0.1:%DJANGO_PORT%
+          echo   http://${params.SECOND_IP}:%DJANGO_PORT%   (if alias added)
+        """
       }
-    }
-
-    stage('Deploy v2 to mini2') {
-      steps {
-        bat '''
-        minikube -p mini2 kubectl -- apply -f deployment-v2.yaml --validate=false
-        minikube -p mini2 kubectl -- apply -f service-v2.yaml --validate=false
-
-        minikube -p mini2 kubectl -- rollout status deployment/django-deployment-v2 --timeout=180s
-        minikube -p mini2 kubectl -- get deploy,svc,pods -o wide
-
-        for /f %%i in ('minikube -p mini2 ip') do set IP2=%%i
-        echo MINI2_IP=%IP2%
-        echo V2 URL: http://%IP2%:30080
-        '''
-      }
-    }
-  }
-
-  post {
-    always {
-      bat '''
-      minikube -p minikube logs --file=minikube-logs-1.txt  || echo SKIP LOGS 1
-      minikube -p mini2    logs --file=minikube-logs-2.txt  || echo SKIP LOGS 2
-      '''
-      archiveArtifacts artifacts: 'minikube-logs-*.txt', allowEmptyArchive: true
     }
   }
 }
