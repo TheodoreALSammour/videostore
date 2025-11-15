@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80           # exposed inside cluster
+      targetPort: 80     # your React/HTML/NGINX container port
+  type: ClusterIP
